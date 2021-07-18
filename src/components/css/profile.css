@@ -1,0 +1,19 @@
+.profile {
+    grid-area: content;
+    background: beige;
+}
+.back_img {
+    width: 1000px;
+    height: 400px;
+}
+.flex_container {
+    display: flex;
+    justify-content: space-between;
+}
+.user__logo {
+    flex: 0 1 180px;
+    margin: 0 20px 0 0;
+}
+.user__info {
+    flex: 1 1 auto;
+}
