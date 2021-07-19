@@ -1,10 +1,11 @@
 .profile {
     grid-area: content;
     background: beige;
+    padding-left: 4px;
 }
-.back_img {
+.back_img img{
     width: 1000px;
-    height: 400px;
+    height: 200px;
 }
 .flex_container {
     display: flex;
@@ -13,6 +14,9 @@
 .user__logo {
     flex: 0 1 180px;
     margin: 0 20px 0 0;
+}
+.user__logo img{
+    width: 150px;
 }
 .user__info {
     flex: 1 1 auto;

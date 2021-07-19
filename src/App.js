@@ -1,7 +1,7 @@
 import './App.css';
-import Header from "./components/Header";
-import Nav from "./components/Nav";
-import ProfileComponent from "./components/ProfileComponent";
+import Header from "./components/Header/Header";
+import Nav from "./components/Nav/Nav";
+import Profile from "./components/Profile/Profile";
 
 
 const App = () => {
@@ -9,7 +9,7 @@ const App = () => {
     <div className="wrapper">
         < Header />
         < Nav />
-        < ProfileComponent />
+        < Profile />
     </div>
 
   );
