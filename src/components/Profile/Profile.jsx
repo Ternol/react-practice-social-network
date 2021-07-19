@@ -5,7 +5,7 @@ import MyPosts from "./MyPosts/Myposts";
 
 const Profile = () => {
     return (
-        <div className={s.profile}>
+        <div>
             <div className={s.back_img}><img
                 src="https://p.bigstockphoto.com/eIdTXLbqQilMs9xbjvcs_bigstock-Aerial-View-Of-Sandy-Beach-Wit-256330393.jpg"
                 alt="background"/></div>

@@ -13,5 +13,9 @@
   grid-gap: 10px;
 }
 
-
+.wrapper-content {
+  grid-area: content;
+  background: beige;
+  padding-left: 4px;
+}
 
