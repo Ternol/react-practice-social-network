@@ -1,6 +1,7 @@
 .header {
     grid-area: header;
     background: lightgreen;
+    height: 72px;
 }
 .header img {
     max-width: 55px;

@@ -6,8 +6,8 @@ const MyPosts = () => {
     return (
         <div>
             <div>Моя стена</div>
-            <textarea name="" id="" cols="30" rows="10"></textarea>
-            <button>Опубликовать</button>
+            <div><textarea></textarea></div>
+            <div><button>Опубликовать</button></div>
             <div className={s.posts}>
                 < Post message = "Сегодня учу props" likescount="10"/>
                 < Post message = "Привет всем! Как дела?" likescount="14"/>
