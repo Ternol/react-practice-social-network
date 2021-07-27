@@ -1,9 +1,11 @@
 import React from 'react'
 import s from './nav.module.css';
 import {NavLink} from "react-router-dom";
+import SidebarFriends from "../SidebarFiends/SidebarFriends";
 
-const Nav = () => {
+const Nav = (props) => {
     return (
+        <div className={s.flexContainer}>
         <nav className={s.nav}>
             <div><NavLink to="/profile" className={s.item} activeClassName={s.activeLink}>Профиль</NavLink></div>
             <div><NavLink to="/dialogs" className={s.item} activeClassName={s.activeLink}>Сообщения</NavLink></div>
@@ -11,6 +13,8 @@ const Nav = () => {
             <div><NavLink to="/music" className={s.item} activeClassName={s.activeLink}>Музыка</NavLink></div>
             <div><NavLink to="/settings" className={s.item} activeClassName={s.activeLink}>Настройки</NavLink></div>
         </nav>
+           <SidebarFriends friendsData={props.friendsSidebar}/>
+        </div>
     )
 }
 

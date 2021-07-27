@@ -8,7 +8,7 @@
   display: grid;
   grid-template-areas: "header header"
                         "navigation content";
-  grid-template-columns: 200px 1fr;
+  grid-template-columns: 300px 1fr;
   grid-template-rows: auto 10fr;
   grid-gap: 10px;
 }
