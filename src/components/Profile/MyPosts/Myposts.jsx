@@ -7,12 +7,16 @@ const Myposts = (props) => {
         .map(post => <Post message={post.message} likescount={post.likesCount} key={post.id}/> )
     const refLinkTextarea = React.createRef();
     const addPost = () => {
-        props.addPost(refLinkTextarea.current.value)
+        props.addPost()
+    }
+    const onPostChange = () => {
+        const text = refLinkTextarea.current.value;
+        props.updateNewPostText(text);
     }
     return (
         <div>
             <div>Моя стена</div>
-            <div><textarea ref={refLinkTextarea}></textarea></div>
+            <div><textarea ref={refLinkTextarea} onChange={onPostChange} value={props.statePosts.newPostText}/></div>
             <div>
                 <button onClick={addPost}>Опубликовать</button>
             </div>

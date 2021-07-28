@@ -1,7 +1,7 @@
 import React from 'react'
 import s from './nav.module.css';
 import {NavLink} from "react-router-dom";
-import SidebarFriends from "../SidebarFiends/SidebarFriends";
+import SidebarFriends from "../SidebarFriends/SidebarFriends";
 
 const Nav = (props) => {
     return (
