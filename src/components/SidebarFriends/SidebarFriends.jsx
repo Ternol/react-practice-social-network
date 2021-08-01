@@ -3,7 +3,7 @@ import Friend from "./Friend/Friend";
 import React from "react";
 
 const sidebarFriends = (props) => {
-    const friendsElements = props.friendsData.myFriends
+    const friendsElements = props.friendsSidebar.myFriends
         .map((friend) => <Friend name={friend.name} key={friend.id}/>)
     return (<div>
             <div className={s.flexContainer}>

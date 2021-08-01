@@ -1,3 +1,7 @@
+import dialogsReducer from "./dialogsReducer";
+import profileReducer from "./profileReducer";
+import friendsSidebarReducer from "./friendsSidebarReducer";
+
 const store = {
     _state : {
         postsPage: {
@@ -6,23 +10,24 @@ const store = {
                 {message: 'Как дела?', id: 2, likesCount: 14},
                 {message: 'Привет всем!', id: 1, likesCount: 21},
             ],
-            newPostText: '',
+            newPostText: ''
         },
-        dialogsPage: {
 
+        dialogsPage: {
             dialogsData: [{name: 'Александр', id: 1},
                 {name: 'Владислав', id: 2},
                 {name: 'Настя', id: 3},
                 {name: 'Володя', id: 4},
                 {name: 'Илон Маск', id: 5},
             ],
-
             messagesData: [{message: '42', id: 1},
                 {message: 'Как дела?', id: 2},
                 {message: 'Привет', id: 3},
             ],
+            newMessageBody : '',
         },
-        myFriendsSidebar: {
+
+        friendsSidebar: {
             myFriends: [
                 {name: 'Александр', id: 1},
                 {name: 'Владислав', id: 2},
@@ -34,29 +39,22 @@ const store = {
         },
     },
     _callSubscriber() {
-        console.log('state changed');
+        console.log('redux changed');
     },
     getState() {
         return this._state;
     },
-    addPost() {
-        const newMessage = {
-            message: this._state.postsPage.newPostText,
-            id: 4,
-            likesCount: 0,
-        };
-        this._state.postsPage.postsData.push(newMessage)
-        this._state.postsPage.newPostText = '';
-        this._callSubscriber(this._state);
-    },
-    updateNewPostText(text) {
-        this._state.postsPage.newPostText = text;
-        this._callSubscriber(this._state);
-    },
     subscribe(observer) {
         this._callSubscriber = observer;
-    }
+    },
+
+    dispatch(action) {
+        profileReducer(this._state.postsPage, action);
+        dialogsReducer(this._state.dialogsPage, action);
+        friendsSidebarReducer(this._state.friendsSidebar,action)
+        this._callSubscriber(this._state)
+    },
 }
 
-
 export default store;
+
