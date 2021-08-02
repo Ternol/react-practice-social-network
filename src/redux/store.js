@@ -41,20 +41,22 @@ const store = {
     _callSubscriber() {
         console.log('redux changed');
     },
+    subscribe(observer) {
+        this._callSubscriber = observer; //_callSubscriber присвоится то,
+        // что передадут в функцию subscribe() как аргумент.
+    },
     getState() {
         return this._state;
     },
-    subscribe(observer) {
-        this._callSubscriber = observer;
-    },
-
     dispatch(action) {
         profileReducer(this._state.postsPage, action);
         dialogsReducer(this._state.dialogsPage, action);
         friendsSidebarReducer(this._state.friendsSidebar,action)
-        this._callSubscriber(this._state)
+        this._callSubscriber(this._state) // вызывается как callback функция
+        // rerenderEntireTree(this._state)
+        // но нет циклической зависимости
     },
 }
 
-export default store;
+
 
