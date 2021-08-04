@@ -1,6 +1,6 @@
-import dialogsReducer from "./dialogsReducer";
-import profileReducer from "./profileReducer";
-import friendsSidebarReducer from "./friendsSidebarReducer";
+import dialogsReducer from "./reducers/dialogsReducer";
+import profileReducer from "./reducers/profileReducer";
+import friendsSidebarReducer from "./reducers/friendsSidebarReducer";
 
 const store = {
     _state : {

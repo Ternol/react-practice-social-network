@@ -4,6 +4,7 @@ import {NavLink} from "react-router-dom";
 import SidebarFriends from "../SidebarFriends/SidebarFriends";
 
 const Nav = (props) => {
+
     return (
         <div className={s.flexContainer}>
         <nav className={s.nav}>
@@ -13,7 +14,7 @@ const Nav = (props) => {
             <div><NavLink to="/music" className={s.item} activeClassName={s.activeLink}>Музыка</NavLink></div>
             <div><NavLink to="/settings" className={s.item} activeClassName={s.activeLink}>Настройки</NavLink></div>
         </nav>
-           <SidebarFriends friendsSidebar={props.friendsSidebar}/>
+           <SidebarFriends myFriends={props.myFriends}/>
         </div>
     )
 }

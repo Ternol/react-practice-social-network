@@ -1,7 +1,7 @@
 import {combineReducers, createStore} from "redux";
-import profileReducer from "./profileReducer";
-import dialogsReducer from "./dialogsReducer";
-import friendsSidebarReducer from "./friendsSidebarReducer";
+import profileReducer from "./reducers/profileReducer";
+import dialogsReducer from "./reducers/dialogsReducer";
+import friendsSidebarReducer from "./reducers/friendsSidebarReducer";
 
 const reducers = combineReducers({
     postsPage: profileReducer,
