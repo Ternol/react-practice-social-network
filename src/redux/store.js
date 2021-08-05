@@ -20,7 +20,8 @@ const store = {
                 {name: 'Володя', id: 4},
                 {name: 'Илон Маск', id: 5},
             ],
-            messagesData: [{message: '42', id: 1},
+            messagesData: [
+                {message: '42', id: 1},
                 {message: 'Как дела?', id: 2},
                 {message: 'Привет', id: 3},
             ],

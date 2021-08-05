@@ -1,7 +1,8 @@
 import React from 'react'
 import s from './nav.module.css';
 import {NavLink} from "react-router-dom";
-import SidebarFriends from "../SidebarFriends/SidebarFriends";
+import SidebarFriendsContainer from "../SidebarFriendsContainer/SidebarFriendsContainer";
+
 
 const Nav = (props) => {
 
@@ -14,7 +15,8 @@ const Nav = (props) => {
             <div><NavLink to="/music" className={s.item} activeClassName={s.activeLink}>Музыка</NavLink></div>
             <div><NavLink to="/settings" className={s.item} activeClassName={s.activeLink}>Настройки</NavLink></div>
         </nav>
-           <SidebarFriends myFriends={props.myFriends}/>
+
+            <SidebarFriendsContainer/>
         </div>
     )
 }

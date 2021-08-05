@@ -11,17 +11,17 @@ import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 
 const App = (props) => {
-    const state = props.store.getState().friendsSidebar
+    // const stateFriendsSidebar = props.store.getState().friendsSidebar
     return (
         <div className="wrapper">
             < Header/>
-            < Nav myFriends={state.myFriends}/>
+            <Nav />
             <div className="wrapper-content">
                 <Route path='/profile' render={ () =>
-                    < Profile store={props.store}/>
+                    < Profile />
                 }/>
                 <Route path='/dialogs' render={() =>
-                    <DialogsContainer store={props.store}/>
+                    <DialogsContainer />
                 }/>
                 <Route path='/news' component={News}/>
                 <Route path='/music' component={Music}/>
