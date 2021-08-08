@@ -4,9 +4,9 @@ import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 
 const mapStateToProps = (state) => ({
-    messagesData: state.messagesData,
-    dialogsData: state.dialogsData,
-    messageBody: state.newMessageBody,
+    messagesData: state.dialogsPage.messagesData,
+    dialogsData: state.dialogsPage.dialogsData,
+    messageBody: state.dialogsPage.newMessageBody,
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -14,7 +14,7 @@ const mapDispatchToProps = (dispatch) => ({
     addMessage: () => dispatch(addMessageActionCreator()),
 })
 
-const DialogsContainer = connect(mapStateToProps,mapDispatchToProps)(Dialogs)
+const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
 
 
 export default DialogsContainer;

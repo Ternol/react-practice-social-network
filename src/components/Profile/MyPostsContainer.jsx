@@ -3,7 +3,8 @@ import {addPostActionCreator, updateNewPostTextActionCreator} from "../../redux/
 import {connect} from "react-redux";
 
 const mapStateToProps = (state) => ({
-    postsData: state.postsData
+    postsData: state.postsPage.postsData,
+    newPostText: state.postsPage.newPostText
 })
 const mapDispatchToProps = (dispatch) => ({
     addPost: () => dispatch(addPostActionCreator()),
