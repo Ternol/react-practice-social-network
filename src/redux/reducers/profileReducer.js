@@ -10,7 +10,6 @@ const initialState = {
     newPostText: '',
 }
 const profileReducer = (state = initialState, action) => {
-    let stateCopy;
     switch (action.type) {
         case ADD_POST : {
             let messageBody = state.newPostText

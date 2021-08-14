@@ -1,0 +1,53 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.userCard {
+    display: flex;
+    margin: 10px 0 0 30px;
+    max-width: 800px;
+    height: 100px;
+    grid-template-columns: 1fr 5fr;
+}
+.userFollow {
+    display: flex;
+    flex-direction: column;
+
+}
+.userFollow img {
+    width: 80px;
+    height: 80px;
+}
+.follow__button button {
+    width: 80px;
+    background: teal;
+    color: #fff;
+    font-size: 12px;
+}
+
+.user {
+    display: grid;
+    grid-template-columns: 400px 100px;
+    border: 1px solid teal;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+.user__description {
+    display: flex;
+    flex-direction: column;
+}
+.user__name {
+    flex-grow: 1;
+    padding: 10px 0 0 10px
+}
+
+.user__status {
+    flex-grow: 0;
+    padding: 0 0 10px 10px;
+}
+
+.user__location {
+
+}

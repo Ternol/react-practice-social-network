@@ -8,21 +8,18 @@ import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import {Route} from "react-router-dom";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import UsersContainer from "./components/UsersContainer/UsersContainer"
 
 
-const App = (props) => {
-    // const stateFriendsSidebar = props.store.getState().friendsSidebar
+const App = () => {
     return (
         <div className="wrapper">
             < Header/>
             <Nav />
             <div className="wrapper-content">
-                <Route path='/profile' render={ () =>
-                    < Profile />
-                }/>
-                <Route path='/dialogs' render={() =>
-                    <DialogsContainer />
-                }/>
+                <Route path='/users' render= { () => <UsersContainer />} />
+                <Route path='/profile' render= { () => < Profile />}/>
+                <Route path='/dialogs' render={() => <DialogsContainer />}/>
                 <Route path='/news' component={News}/>
                 <Route path='/music' component={Music}/>
                 <Route path='/settings' component={Settings}/>
