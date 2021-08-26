@@ -1,9 +1,13 @@
 import React from 'react'
 import s from './profileInfo.module.css';
 import defaultAva from './../../../../../img/defaultAva.png'
+import Loader from "../../../../../UI/Loader";
 
 
 const ProfileInfo = (props) => {
+    if (!props.profile) {
+        return <Loader/>
+    }
     return (
         <div>
             <div className={s.back_img}>
@@ -14,11 +18,11 @@ const ProfileInfo = (props) => {
             <div>
                 <div className={s.flex_container}>
                     <div className={s.user__logo}>
-                        {props.profile.photos.large
-                            ? <img src={props.profile.photos.large} alt="user avatar"/>
-                            : <img
+                        {!props.profile.photos.large
+                            ? <img
                                 src={defaultAva}
                                 alt="user avatar"/>
+                            : <img src={props.profile.photos.large} alt="user avatar"/>
                         }
 
                     </div>
