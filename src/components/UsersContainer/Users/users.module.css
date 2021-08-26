@@ -22,12 +22,14 @@
 .userFollow img {
     width: 80px;
     height: 80px;
+    cursor: pointer;
 }
 .follow__button button {
     width: 80px;
     background: teal;
     color: #fff;
     font-size: 12px;
+    cursor: pointer;
 }
 
 .user {

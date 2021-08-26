@@ -2,27 +2,30 @@ import React from "react";
 import './App.css';
 import Header from "./components/Header/Header";
 import Nav from "./components/Nav/Nav";
-import Profile from "./components/Profile/Profile";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
-import {Route} from "react-router-dom";
+import {Redirect, Switch, Route} from "react-router-dom";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/UsersContainer/UsersContainer"
+import ProfileContainer from "./components/Profile/ProfileContainer/ProfileContainer";
 
 
 const App = () => {
     return (
         <div className="wrapper">
             < Header/>
-            <Nav />
+            <Nav/>
             <div className="wrapper-content">
-                <Route path='/users' render= { () => <UsersContainer />} />
-                <Route path='/profile' render= { () => < Profile />}/>
-                <Route path='/dialogs' render={() => <DialogsContainer />}/>
-                <Route path='/news' component={News}/>
-                <Route path='/music' component={Music}/>
-                <Route path='/settings' component={Settings}/>
+                <Switch>
+                    <Route path='/users'><UsersContainer/></Route>
+                    <Route path='/profile/:id'><ProfileContainer/></Route>
+                    <Route path='/dialogs'><DialogsContainer/></Route>
+                    <Route path='/news'><News/></Route>
+                    <Route path='/music'><Music/></Route>
+                    <Route path='/settings'><Settings/></Route>
+                    <Redirect to='/news'/>
+                </Switch>
             </div>
         </div>
     )

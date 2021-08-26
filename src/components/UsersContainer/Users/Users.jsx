@@ -3,6 +3,7 @@ import axios from "axios";
 import s from "./users.module.css";
 import userPhoto from "../../../img/defaultAva.png";
 import Loader from "../../../UI/Loader";
+import {useHistory} from 'react-router-dom';
 
 const Users = (props) => {
     useEffect(() => {
@@ -33,7 +34,7 @@ const Users = (props) => {
                 props.showLoader(false)
             })
     }
-
+    const router = useHistory();
     return (
         <div>
 
@@ -50,6 +51,7 @@ const Users = (props) => {
                         <div className={s.userFollow}>
                             <img
                                 src={u.photos.small != null ? u.photos.small : userPhoto}
+                                onClick={()=> router.push('/profile/'+u.id)}
                                 alt="user avatar"/>
                             <div className={s.follow__button}>
                                 {
