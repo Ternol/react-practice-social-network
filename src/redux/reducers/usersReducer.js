@@ -20,7 +20,7 @@ const usersReducer = (state=initialState, action) => {
                 ...state,
             usersData: state.usersData.map((u) => {
                 if (u.id === action.userId) {
-                  return  {...u, isFollowed: true}
+                  return  {...u, followed: true}
                 }
                     return u
             })
@@ -31,7 +31,7 @@ const usersReducer = (state=initialState, action) => {
                 ...state,
             usersData: state.usersData.map((u) => {
                 if (u.id === action.userId) {
-                    return {...u, isFollowed: false}
+                    return {...u, followed: false}
                 }
                     return u
             })

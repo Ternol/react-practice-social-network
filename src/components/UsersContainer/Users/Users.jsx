@@ -9,7 +9,8 @@ const Users = (props) => {
     useEffect(() => {
         props.showLoader(true)
         axios.get(
-            `https://social-network.samuraijs.com/api/1.0/users/?page=${props.currentPage}&count=${props.pageSize}`)
+            `https://social-network.samuraijs.com/api/1.0/users/?page=${props.currentPage}&count=${props.pageSize}`,
+            {withCredentials: true})
             .then(response => {
                 props.setUsers(response.data.items);
                 props.setTotalUsersCount(response.data.totalCount);
@@ -28,7 +29,8 @@ const Users = (props) => {
         props.showLoader(true)
         props.setCurrentPage(pageNumber)
         axios.get(
-            `https://social-network.samuraijs.com/api/1.0/users/?page=${pageNumber}&count=${props.pageSize}`)
+            `https://social-network.samuraijs.com/api/1.0/users/?page=${pageNumber}&count=${props.pageSize}`,
+            {withCredentials: true})
             .then(response => {
                 props.setUsers(response.data.items)
                 props.showLoader(false)
@@ -48,27 +50,48 @@ const Users = (props) => {
             {props.isLoading
                 ? <Loader/>
                 : <div>{props.users.map(u => <div key={u.id} className={s.userCard}>
-                        <div className={s.userFollow}>
-                            <img
-                                src={u.photos.small != null ? u.photos.small : userPhoto}
-                                onClick={()=> router.push('/profile/'+u.id)}
-                                alt="user avatar"/>
-                            <div className={s.follow__button}>
-                                {
-                                    u.isFollowed ? <button onClick={() => props.unFollow(u.id)}>Отписаться</button>
-                                        : <button onClick={() => props.follow(u.id)}>Подписаться</button>
-                                }
-                            </div>
+                    <div className={s.userFollow}>
+                        <img
+                            src={u.photos.small != null ? u.photos.small : userPhoto}
+                            onClick={() => router.push('/profile/' + u.id)}
+                            alt="user avatar"/>
+                        <div className={s.follow__button}>
+                            {
+                                u.followed ? <button onClick={() =>
+                                        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
+                                            {
+                                                withCredentials: true,
+                                                headers: {
+                                                    "API-KEY" : "550aa669-3f14-48fe-b02d-002a7281fe06"
+                                                }
+                                            }).then(response => {
+                                            if (response.data.resultCode === 0) props.unFollow(u.id)
+                                        })}>Отписаться</button>
+
+                                    : <button onClick={() =>
+                                        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
+                                            {},
+                                            {
+                                                withCredentials: true,
+                                                headers: {
+                                                    "API-KEY" : "550aa669-3f14-48fe-b02d-002a7281fe06"
+                                                }
+                                            }).then(response => {
+                                            if (response.data.resultCode === 0) props.follow(u.id)
+                                        })
+                                    }>Подписаться</button>
+                            }
                         </div>
-                        <div className={s.user}>
-                            <div className={s.user__description}>
-                                <span className={s.user__name}>{u.name}</span>
-                                <span className={s.user__status}>{u.status}</span>
-                            </div>
-                            <div className={s.user__location}>{u.location = 'Не указано'}</div>
+                    </div>
+                    <div className={s.user}>
+                        <div className={s.user__description}>
+                            <span className={s.user__name}>{u.name}</span>
+                            <span className={s.user__status}>{u.status}</span>
                         </div>
-                    </div>)}
-            </div>
+                        <div className={s.user__location}>{u.location = 'Не указано'}</div>
+                    </div>
+                </div>)}
+                </div>
 
             }
 
