@@ -1,3 +1,5 @@
+import defaultAva from "../../img/defaultAva.png";
+
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
@@ -9,7 +11,15 @@ const initialState = {
         {message: 'Привет всем!', id: 1, likesCount: 21},
     ],
     newPostText: '',
-    profile: null
+    profile: {
+        fullName: 'Алексей Завьялов',
+        userId: 777777,
+        lookingForAJob: true,
+        lookingForAJobDescription: 'Ищу работу react-разработчиком, изучаю js и react около 3 месяцев',
+        photos: {
+            large: defaultAva
+        }
+    }
 }
 const profileReducer = (state = initialState, action) => {
     switch (action.type) {
