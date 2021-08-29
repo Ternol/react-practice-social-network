@@ -3,7 +3,7 @@ import {
     follow,
     setCurrentPage,
     setTotalUsersCount,
-    setUsers,
+    setUsers, toggleFollowingInProgress,
     unFollow
 } from "../../redux/reducers/usersReducer";
 import {showLoader} from "../../redux/reducers/UIUtilsReducer";
@@ -16,11 +16,12 @@ const mapStateToProps = (state) => {
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
-        isLoading: state.UIUtils.isLoading
+        isLoading: state.UIUtils.isLoading,
+        isFollowingInProgress: state.usersPage.isFollowingInProgress
     }
 }
 
 
 export default connect(mapStateToProps, {follow, unFollow, setUsers,
-    setCurrentPage, setTotalUsersCount, showLoader
+    setCurrentPage, setTotalUsersCount, showLoader, toggleFollowingInProgress
 })(Users)
