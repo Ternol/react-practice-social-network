@@ -2,8 +2,7 @@ import React, {useEffect} from 'react'
 import Profile from "./Profile/Profile";
 import {useParams} from 'react-router-dom'
 import {connect} from "react-redux";
-import {setUserProfile} from "../../../redux/reducers/profileReducer";
-import {fetching} from "../../../utils/fetching";
+import {setProfile} from "../../../redux/reducers/profileReducer";
 
 const ProfileContainer = (props) => {
 
@@ -12,13 +11,8 @@ const ProfileContainer = (props) => {
         userId.id = 19324
     }
     useEffect(() => {
-        fetching(`https://social-network.samuraijs.com/api/1.0/profile/${userId.id}`,
-            `Не удалось получить данные пользователя id: ${userId.id}`)
-            .then(response => {
-                props.setUserProfile(response.data)
-            })
-
-    }, [])
+        props.setProfile(userId.id)
+    }, [userId.id])
     return <Profile {...props}/>
 };
 
@@ -26,5 +20,5 @@ const mapStateToProps = (state) => ({
     profile: state.profilePage.profile
 })
 
-export default connect(mapStateToProps, {setUserProfile})(ProfileContainer)
+export default connect(mapStateToProps, {setProfile})(ProfileContainer)
 

@@ -1,13 +1,11 @@
 import {connect} from "react-redux";
 import {
     changePage,
-    follow, follow_UnFollow, getUsers,
+    follow_UnFollow,
+    getUsers,
     setCurrentPage,
-    setTotalUsersCount,
-    setUsers, toggleFollowingInProgress,
-    unFollow
+    toggleFollowingInProgress
 } from "../../redux/reducers/usersReducer";
-import {showLoader} from "../../redux/reducers/UIUtilsReducer";
 import Users from "./Users/Users";
 
 

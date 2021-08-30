@@ -1,4 +1,5 @@
 import defaultAva from "../../img/defaultAva.png";
+import {profileAPI} from "../../API/api";
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
@@ -61,3 +62,10 @@ export const setUserProfile = (profile) => ({
     type: 'SET_USER_PROFILE',
     profile
 })
+
+export const setProfile = (userId) => (dispatch) => {
+    profileAPI.getUserProfile(userId)
+        .then(response => {
+            dispatch(setUserProfile(response.data))
+        })
+}

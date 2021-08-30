@@ -33,3 +33,35 @@ export const usersAPI = {
 
 }
 
+export const profileAPI = {
+    getUserProfile(userId, message=`Не удалось получить данные пользователя id: ${userId}`) {
+        try {
+            return instance(`profile/${userId}`)
+                .then(response => {
+                    if (response.status === 200) {
+                    return response
+                }})
+        } catch {
+            alert(message)
+        }
+
+
+    }
+
+}
+
+
+
+
+
+export const authAPI = {
+    setAuthData() {
+        return instance('auth/me')
+            .then(response =>{
+        if (response.status === 200) return response.data
+            })
+    }
+}
+
+
+

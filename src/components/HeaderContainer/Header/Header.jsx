@@ -1,12 +1,14 @@
 import React from "react";
+import logo from './../../../img/logo.png'
 import s from './header.module.css';
 import {NavLink} from "react-router-dom";
+
 
 const Header = (props) => {
     return (
         <header className={s.header}>
             <img
-                src="https://w7.pngwing.com/pngs/113/271/png-transparent-logo-symbol-sign-company-logo-miscellaneous-leaf-label-thumbnail.png"
+                src={logo}
                 alt="logo"/>
             <div className={s.loginBlock}>
                 {
