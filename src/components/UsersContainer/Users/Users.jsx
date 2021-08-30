@@ -4,16 +4,11 @@ import userPhoto from "../../../img/defaultAva.png";
 import Loader from "../../../UI/Loader";
 import {useHistory} from 'react-router-dom';
 import {usersAPI} from "../../../API/api";
+import {changePage} from "../../../redux/reducers/usersReducer";
 
 const Users = (props) => {
     useEffect(() => {
-        props.showLoader(true)
-        usersAPI.getUsers(props.currentPage,props.pageSize)
-            .then(response => {
-                props.setUsers(response.items);
-                props.setTotalUsersCount(response.totalCount);
-                props.showLoader(false)
-            });
+       props.getUsers(props.currentPage, props.pageSize)
     }, [])
 
     const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
@@ -24,31 +19,15 @@ const Users = (props) => {
     }
 
     const onPageChanged = (pageNumber) => {
-        props.showLoader(true)
-        props.setCurrentPage(pageNumber)
-        usersAPI.changePage(pageNumber,props.pageSize)
-            .then(response => {
-                props.setUsers(response.items)
-                props.showLoader(false)
-            })
+        props.changePage(pageNumber, props.pageSize)
     }
     const router = useHistory();
 
     const follow = (userId) => {
-        props.toggleFollowingInProgress(true, userId)
-        usersAPI.followUser(userId)
-            .then(response => {
-                if (response.resultCode === 0) props.follow(userId)
-                props.toggleFollowingInProgress(false, userId)
-            })
+       props.follow_UnFollow(userId,'f')
     }
     const unFollow = (userId) => {
-        props.toggleFollowingInProgress(true, userId)
-        usersAPI.unFollowUser(userId)
-            .then(response => {
-                if (response.resultCode === 0) props.unFollow(userId)
-                props.toggleFollowingInProgress(false, userId)
-            })
+        props.follow_UnFollow(userId,'uf')
     }
 
 

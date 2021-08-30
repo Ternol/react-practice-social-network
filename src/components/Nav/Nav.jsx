@@ -17,7 +17,7 @@ const Nav = (props) => {
             <div><NavLink to="/settings" className={s.item} activeClassName={s.activeLink}>Настройки</NavLink></div>
         </nav>
 
-            <SidebarFriendsContainer/>
+            {/*<SidebarFriendsContainer/>*/}
         </div>
     )
 }

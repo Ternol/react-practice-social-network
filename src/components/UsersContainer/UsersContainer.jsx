@@ -1,6 +1,7 @@
 import {connect} from "react-redux";
 import {
-    follow,
+    changePage,
+    follow, follow_UnFollow, getUsers,
     setCurrentPage,
     setTotalUsersCount,
     setUsers, toggleFollowingInProgress,
@@ -16,12 +17,12 @@ const mapStateToProps = (state) => {
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
-        isLoading: state.UIUtils.isLoading,
+        isLoading: state.usersPage.isLoading,
         isFollowingInProgress: state.usersPage.isFollowingInProgress
     }
 }
 
 
-export default connect(mapStateToProps, {follow, unFollow, setUsers,
-    setCurrentPage, setTotalUsersCount, showLoader, toggleFollowingInProgress
-})(Users)
+export default connect(mapStateToProps,
+    {follow_UnFollow, setCurrentPage,
+        toggleFollowingInProgress, getUsers, changePage})(Users)
