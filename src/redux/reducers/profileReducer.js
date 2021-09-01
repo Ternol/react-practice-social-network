@@ -4,6 +4,7 @@ import {profileAPI} from "../../API/api";
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
+const GET_STATUS = 'GET_STATUS';
 
 const initialState = {
     postsData: [
@@ -20,7 +21,8 @@ const initialState = {
         photos: {
             large: defaultAva
         }
-    }
+    },
+    status: ''
 }
 const profileReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -40,7 +42,9 @@ const profileReducer = (state = initialState, action) => {
         case SET_USER_PROFILE : {
             return {...state, profile: action.profile}
         }
-
+        case GET_STATUS : {
+            return {...state, status: action.status}
+        }
         default:
             return state;
     }
@@ -59,13 +63,32 @@ export const updateNewPostTextActionCreator = (text) => ({
 })
 
 export const setUserProfile = (profile) => ({
-    type: 'SET_USER_PROFILE',
+    type: SET_USER_PROFILE,
     profile
 })
+export const setStatusToState = (status) => ({
+    type: GET_STATUS,
+    status
+})
+
 
 export const setProfile = (userId) => (dispatch) => {
     profileAPI.getUserProfile(userId)
         .then(response => {
             dispatch(setUserProfile(response.data))
         })
+}
+export const getStatus = (status) => (dispatch) => {
+   profileAPI.getStatus(status)
+       .then(response => {
+           dispatch(setStatusToState(response.data))
+       })
+}
+export const updateStatus = (status) => (dispatch) => {
+   profileAPI.updateMyStatus(status)
+       .then(response => {
+           if (response.data.resultCode === 0) {
+               dispatch(setStatusToState(status))
+           }
+       })
 }

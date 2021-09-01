@@ -3,8 +3,6 @@ import s from "./users.module.css";
 import userPhoto from "../../../img/defaultAva.png";
 import Loader from "../../../UI/Loader";
 import {useHistory} from 'react-router-dom';
-import {usersAPI} from "../../../API/api";
-import {changePage} from "../../../redux/reducers/usersReducer";
 
 const Users = (props) => {
     useEffect(() => {

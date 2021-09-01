@@ -10,6 +10,7 @@ const AppRouter = (props) => {
             {props.isAuth
                 ? <Switch>
                     {privateRoutes.map(route => <Route
+                        key={route.path}
                         path={route.path}
                         exact={route.exact}
                         component={route.component}/>)}
@@ -17,6 +18,7 @@ const AppRouter = (props) => {
                 </Switch>
                 : <Switch>
                     {publicRoutes.map(route => <Route
+                        key={route.path}
                         path={route.path}
                         exact={route.exact}
                         component={route.component}/>)}
