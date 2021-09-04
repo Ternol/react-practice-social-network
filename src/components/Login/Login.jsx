@@ -12,8 +12,8 @@ const Login = (props) => {
         password: '',
         checkbox: false
     }
-    const onSubmit = values => {
-       props.loginUser(values.email, values.password, values.checkbox)
+    const onSubmit = (values, {setStatus}) => {
+       props.loginUser(values.email, values.password, values.checkbox, setStatus)
     }
     const validationSchema = Yup.object({
         email: Yup.string().email().required('Обязательное поле'),
@@ -50,6 +50,7 @@ const Login = (props) => {
                            autoComplete={'on'}
                     />
                     {formik.touched.password && formik.errors.password ? (<div className={'error'}>{formik.errors.password}</div>) : null}
+                    {<div><span className={'error'}>{formik.status}</span></div>}
                 </div>
                 <label htmlFor="checkbox">Запомнить меня</label>
                 <div className={'form-control'}>

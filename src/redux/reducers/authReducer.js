@@ -48,11 +48,13 @@ export const logoutUser = () => (dispatch) => {
             }
         })
 }
-export const loginUser = (email,password,rememberMe) => (dispatch) => {
+export const loginUser = (email,password,rememberMe, setStatus) => (dispatch) => {
     return authAPI.login(email,password,rememberMe)
         .then(response => {
             if (response.data.resultCode === 0) {
                 dispatch(authMe())
+            } else {
+                setStatus(response.data.messages)
             }
         })
 }
