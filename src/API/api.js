@@ -69,7 +69,21 @@ export const authAPI = {
     setAuthData() {
         return instance('auth/me')
             .then(response => {
-                if (response.status === 200) return response.data
+                if (response.status === 200) return response
+            })
+    },
+    logout() {
+        return instance.delete('auth/login')
+            .then(response => {
+                if(response.status === 200) return response
+            })
+    },
+    login(email, password, rememberMe=false) {
+        return instance.post('auth/login', {
+            email, password, rememberMe
+        })
+            .then(response=> {
+            if(response.status === 200) return response
             })
     }
 }

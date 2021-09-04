@@ -2,16 +2,18 @@ import React from 'react';
 import {useFormik} from "formik";
 import * as Yup from 'yup';
 import './login.css'
+import {connect} from "react-redux";
+import {loginUser, logoutUser} from "../../redux/reducers/authReducer";
 
-const Login = () => {
 
+const Login = (props) => {
     const initialValues = {
         email: '',
         password: '',
         checkbox: false
     }
     const onSubmit = values => {
-        console.log(values)
+       props.loginUser(values.email, values.password, values.checkbox)
     }
     const validationSchema = Yup.object({
         email: Yup.string().email().required('Обязательное поле'),
@@ -26,7 +28,7 @@ const Login = () => {
     return (
         <div className={'login'}>
             <form onSubmit={formik.handleSubmit}>
-                <label htmlFor="email">Email</label>
+                <label htmlFor="email">Почта</label>
                 <div className={'form-control'}>
                     <input type="email"
                            id='email'
@@ -45,6 +47,7 @@ const Login = () => {
                            value={formik.values.password}
                            onChange={formik.handleChange}
                            onBlur={formik.handleBlur}
+                           autoComplete={'on'}
                     />
                     {formik.touched.password && formik.errors.password ? (<div className={'error'}>{formik.errors.password}</div>) : null}
                 </div>
@@ -62,5 +65,8 @@ const Login = () => {
         </div>
     );
 };
+const mapStateToProps = (state) => ({
+    isAuth: state.auth.isAuth
+})
 
-export default Login;
+export default connect(mapStateToProps,{loginUser,logoutUser})(Login);

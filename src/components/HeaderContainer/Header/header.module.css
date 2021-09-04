@@ -11,7 +11,7 @@
 .loginBlock {
     float: right;
     margin-right: 20px;
-    margin-top: 22px;
+    margin-top: 16px;
 }
 .loginBlock a {
     color: white;
@@ -20,4 +20,12 @@
 }
 .loginBlock span {
     color: white;
+}
+.loginBlock_logout {
+    cursor: pointer;
+}
+.loginBlock__user {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
 }
