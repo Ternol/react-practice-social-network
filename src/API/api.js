@@ -82,7 +82,7 @@ export const authAPI = {
         return instance.post('auth/login', {
             email, password, rememberMe
         })
-            .then(response=> {
+            .then(response => {
             if(response.status === 200) return response
             })
     }

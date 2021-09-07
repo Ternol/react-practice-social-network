@@ -1,4 +1,3 @@
-import defaultAva from "../../img/defaultAva.png";
 import {profileAPI} from "../../API/api";
 
 const ADD_POST = 'ADD-POST';
@@ -12,13 +11,7 @@ const initialState = {
         {message: 'Привет всем!', id: 1, likesCount: 21},
     ],
     profile: {
-        fullName: 'Алексей Завьялов',
-        userId: 777777,
-        lookingForAJob: true,
-        lookingForAJobDescription: 'Ищу работу react-разработчиком, изучаю js и react около 3 месяцев',
-        photos: {
-            large: defaultAva
-        }
+
     },
     status: ''
 }

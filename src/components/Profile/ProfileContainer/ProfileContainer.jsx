@@ -8,7 +8,7 @@ const ProfileContainer = (props) => {
 
     const userId = useParams()
     if (!userId.id) {
-        userId.id = 19324
+        userId.id = props.authorizatedUserId
     }
     useEffect(() => {
         props.setProfile(userId.id)
@@ -19,7 +19,8 @@ const ProfileContainer = (props) => {
 
 const mapStateToProps = (state) => ({
     profile: state.profilePage.profile,
-    status: state.profilePage.status
+    status: state.profilePage.status,
+    authorizatedUserId: state.auth.id
 })
 
 export default connect(mapStateToProps, {setProfile, getStatus,updateStatus})(ProfileContainer)

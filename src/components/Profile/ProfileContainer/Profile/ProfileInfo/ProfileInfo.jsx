@@ -18,11 +18,11 @@ const ProfileInfo = (props) => {
             <div>
                 <div className={s.flex_container}>
                     <div className={s.user__logo}>
-                        {!props.profile.photos.large
-                            ? <img
+                        {props.profile?.photos?.large
+                            ? <img src={props.profile.photos.large} alt="user avatar"/>
+                            :  <img
                                 src={defaultAva}
                                 alt="user avatar"/>
-                            : <img src={props.profile.photos.large} alt="user avatar"/>
                         }
 
                     </div>

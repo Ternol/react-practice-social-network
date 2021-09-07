@@ -13,8 +13,7 @@ const initialState = {
 const authReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_USER_DATA: {
-            return {...state, id:action.id, email: action.email,
-                login: action.login, isAuth: action.isAuth}
+            return {...state, ...action.authorizatedUserData}
         }
         default:
             return state;
@@ -23,8 +22,9 @@ const authReducer = (state = initialState, action) => {
 }
 
 export const setAuthUserData = (id,email,login,isAuth) => ({
-    type: SET_USER_DATA, id,email,login,isAuth
-
+    type: SET_USER_DATA, authorizatedUserData: {
+        id,email,login,isAuth
+    }
 })
 
 
@@ -34,7 +34,7 @@ export const authMe = () => (dispatch) => {
     return authAPI.setAuthData()
         .then(response => {
             if (response.data.resultCode === 0) {
-                const {id,login,email} = response.data
+                const {id,login,email} = response.data.data
                 dispatch(setAuthUserData(id,email,login,true))
             }
         })

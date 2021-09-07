@@ -17,6 +17,5 @@ export const privateRoutes = [
 export const publicRoutes = [
     {path: '/news', component: News, exact: false},
     {path: '/music', component: Music, exact: false},
-    {path: '/settings', component: Settings, exact: false},
     {path: '/login', component: Login, exact: false},
 ]
