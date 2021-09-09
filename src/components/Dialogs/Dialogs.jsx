@@ -13,8 +13,6 @@ const Dialogs = (props) => {
     const messageElements = props.messagesData
         .map(message => <Message text={message.message} key={message.id}/>)
 
-
-
     return (
         <div className={s.dialogs}>
             <div className={s.dialog_items}>
@@ -22,19 +20,8 @@ const Dialogs = (props) => {
             </div>
             <div className={s.messages}>
                 <div>{messageElements}</div>
-
                 <NewMessageForm addMesage={props.addMessage}/>
-
-                {/*<div>*/}
-
-                {/*    <textarea placeholder='Введите текст'*/}
-                {/*               onChange={onMessageBodyChange}*/}
-                {/*               value={props.messageBody}/></div>*/}
-                {/*<div>*/}
-                {/*    <button onClick={addMessage}>Отправить</button>*/}
-                {/*</div>*/}
             </div>
-
         </div>
     )
 }

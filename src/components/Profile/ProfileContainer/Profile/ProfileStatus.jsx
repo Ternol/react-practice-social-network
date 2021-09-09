@@ -16,9 +16,9 @@ const ProfileStatus = (props) => {
 
     return (
         <div>{
-            props.userId !== 19324 && !editMode
+            props.userId !== props.authorizatedUserId && !editMode
                 ? <div><span>{props.status}</span></div>
-                : <div className=""><span onClick={
+                : <div style={{cursor: 'pointer'}}><span onClick={
                     () =>setEditMode(true)
                 }>{tempStatus || '-------'}</span></div>
         }

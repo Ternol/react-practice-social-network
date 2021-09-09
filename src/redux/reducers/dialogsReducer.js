@@ -1,4 +1,4 @@
-const ADD_MESSAGE = 'ADD_MESSAGE';
+const ADD_MESSAGE = 'dialogsReducer/ADD_MESSAGE';
 
 const initialState = {
     dialogsData: [{name: 'Александр', id: 1},

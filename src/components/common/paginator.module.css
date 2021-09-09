@@ -1,0 +1,7 @@
+.selectedPage {
+    font-weight: bold;
+}
+.wrap {
+    display: flex;
+    flex-wrap: wrap;
+}

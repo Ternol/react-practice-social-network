@@ -1,4 +1,4 @@
-const SET_LOADER = 'SET_LOADER'
+const SET_LOADER = 'UIUtilsReducer/SET_LOADER'
 
 const initialState = {
     isLoading: false

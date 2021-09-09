@@ -19,7 +19,6 @@ const NewMessageForm = (props) => {
         validationSchema
     })
 
-
     return (
         <form onSubmit={formik.handleSubmit}>
             <label htmlFor="textarea">Новое сообщение</label>

@@ -1,6 +1,6 @@
 import {authAPI} from "../../API/api";
 
-const SET_USER_DATA = 'SET_USER_DATA';
+const SET_USER_DATA = 'authReducer/SET_USER_DATA';
 
 const initialState = {
     id: null,
@@ -21,42 +21,36 @@ const authReducer = (state = initialState, action) => {
 
 }
 
-export const setAuthUserData = (id,email,login,isAuth) => ({
+export const setAuthUserData = (id, email, login, isAuth) => ({
     type: SET_USER_DATA, authorizatedUserData: {
-        id,email,login,isAuth
+        id, email, login, isAuth
     }
 })
 
 
 export default authReducer;
 
-export const authMe = () => (dispatch) => {
-    return authAPI.setAuthData()
-        .then(response => {
-            if (response.data.resultCode === 0) {
-                const {id,login,email} = response.data.data
-                dispatch(setAuthUserData(id,email,login,true))
-            }
-        })
+export const authMe = () => async (dispatch) => {
+    const response = await authAPI.setAuthData()
+    if (response.data.resultCode === 0) {
+        const {id, login, email} = response.data.data
+        dispatch(setAuthUserData(id, email, login, true))
+    }
 }
 
-export const logoutUser = () => (dispatch) => {
-    return authAPI.logout()
-        .then(response => {
-            if (response.data.resultCode === 0) {
-                dispatch(setAuthUserData(null,null,null,false))
-            }
-        })
+export const logoutUser = () => async (dispatch) => {
+    const response = await authAPI.logout()
+    if (response.data.resultCode === 0) {
+        dispatch(setAuthUserData(null, null, null, false))
+    }
 }
-export const loginUser = (email,password,rememberMe, setStatus) => (dispatch) => {
-    return authAPI.login(email,password,rememberMe)
-        .then(response => {
-            if (response.data.resultCode === 0) {
-                dispatch(authMe())
-            } else {
-                setStatus(response.data.messages)
-            }
-        })
+export const loginUser = (email, password, rememberMe, setStatus) => async (dispatch) => {
+    const response = await authAPI.login(email, password, rememberMe)
+    if (response.data.resultCode === 0) {
+        dispatch(authMe())
+    } else {
+        setStatus(response.data.messages)
+    }
 }
 
 

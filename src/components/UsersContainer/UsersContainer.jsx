@@ -1,12 +1,10 @@
 import {connect} from "react-redux";
 import {
-    changePage,
-    follow_UnFollow,
-    getUsers,
-    setCurrentPage,
+    changePage, getUsers,
+    follow, unFollow,
     toggleFollowingInProgress
 } from "../../redux/reducers/usersReducer";
-import Users from "./Users/Users";
+import UsersList from "./UsersList/UsersList";
 
 
 const mapStateToProps = (state) => {
@@ -22,5 +20,5 @@ const mapStateToProps = (state) => {
 
 
 export default connect(mapStateToProps,
-    {follow_UnFollow, setCurrentPage,
-        toggleFollowingInProgress, getUsers, changePage})(Users)
+    {follow,unFollow,
+        toggleFollowingInProgress, getUsers, changePage})(UsersList)

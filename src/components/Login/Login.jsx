@@ -3,7 +3,7 @@ import {useFormik} from "formik";
 import * as Yup from 'yup';
 import './login.css'
 import {connect} from "react-redux";
-import {loginUser, logoutUser} from "../../redux/reducers/authReducer";
+import {loginUser} from "../../redux/reducers/authReducer";
 
 
 const Login = (props) => {
@@ -70,4 +70,4 @@ const mapStateToProps = (state) => ({
     isAuth: state.auth.isAuth
 })
 
-export default connect(mapStateToProps,{loginUser,logoutUser})(Login);
+export default connect(mapStateToProps,{loginUser})(Login);
