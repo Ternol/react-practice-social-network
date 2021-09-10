@@ -10,7 +10,7 @@ const UsersList = ({totalUsersCount,pageSize,changePage,currentPage,...props}) =
 
     return (
         <div>
-            <Paginator totalUsersCount={totalUsersCount} pageSize={pageSize} changePage={changePage} currentPage={currentPage}/>
+            <Paginator totalItemsCount={totalUsersCount} pageSize={pageSize} changePage={changePage} currentPage={currentPage}/>
             {props.isLoading
                 ? <Loader/>
                 : <div>
