@@ -1,0 +1,8 @@
+.profile {
+    margin: 0 20px 20px 10px;
+    display: flex;
+}
+.profileBody{
+    flex: 1 1 auto;
+    padding: 0 15px 10px;
+}

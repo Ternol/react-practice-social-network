@@ -1,0 +1,29 @@
+.value {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 22px;
+    margin-bottom: 10px;
+}
+.statusBlock{
+    display: flex;
+}
+.status{
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 20px;
+    margin-right: 20px;
+}
+.statusSettings {
+    cursor: pointer;
+}
+.statusSettings img{
+    width: 20px;
+    height: 20px;
+}
+.statusInput input {
+    height: 24px;
+    width: 100%;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 20px;
+}
