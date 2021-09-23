@@ -1,7 +1,7 @@
 .header {
     grid-area: header;
     width: 100%;
-    background-color: #e44d3a;
+    background-color: #f85d46;
     color: white;
     height: 80px;
 }
@@ -25,6 +25,8 @@
 
 .label {
     margin: 0 0 0 30px;
+    font-size: 16px;
+    line-height: 18px;
 }
 
 .linksBlock {
@@ -61,13 +63,17 @@
 }
 .loginName{
     margin-right: 10px;
+    font-size: 16px;
+    line-height: 18px;
 }
 
 
 .loginDropDown{
     display: none;
     position: absolute;
-    background-color: #e44d3a;
+    background-color: transparent;
+    font-size: 16px;
+    left: 20px;
     width: 50px;
     top: 40px;
 }

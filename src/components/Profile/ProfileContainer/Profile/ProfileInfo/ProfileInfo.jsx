@@ -1,6 +1,6 @@
 import React from 'react'
 import defaultAva from './../../../../../img/defaultAva.png'
-import Loader from "../../../../../UI/Loader";
+import Loader from "../../../../../UI/Loader/Loader";
 import s from './profileInfo.module.css';
 import facebook from './../../../../../img/icons/social-links/facebook-16.png';
 import website from './../../../../../img/icons/social-links/website-16.png';
@@ -37,7 +37,7 @@ const ProfileInfo = (props) => {
             <p><span className={s.info}>ID: </span><span className={s.value}>{props.profile?.userId || 'test ID'}</span></p>
             <p><span className={s.info}>Looking for a job: </span><span className={s.value}>{props.profile?.lookingForAJob ? 'Yes' : 'No'}</span></p>
         </div>
-        <div className={s.profileLinks} onClick={()=>console.log(socialLinks)}>
+        <div className={s.profileLinks}>
             {socialLinks.map(socialLink => <div className={s.link} key={socialLink.alt}>
                 <div className="link-img">
                     <img src={socialLink.img} alt={socialLink.alt}/>

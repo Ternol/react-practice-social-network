@@ -1,13 +1,20 @@
 import React from 'react'
 import s from './Post.module.css';
+import defaultAva from './../../../../../../../img/defaultAva.png'
 
 const Post = (props) => {
     return (
-        <div className={s.item}><img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROdUNllTvwag4LcIRAu9tcb8tgbR_RoaGQSE3_Zv6zS2ewaBC6z9PuJ2bYtfxwCRx7d6U&usqp=CAU"
-            alt="user avatar"/>
-            {props.message}
-            <div><span>Ометок нравится: </span></div> {props.likescount}
+        <div className={s.post}>
+            <div className={s.postAbout}>
+                <div className={s.userAva}>
+                    <img src={defaultAva} alt="user avatar"/>
+                </div>
+                <div className={s.userName}>
+                    <span>{props.userName}</span>
+                </div>
+            </div>
+            <div className={s.postBody}><span>{props.message}</span>
+            </div>
         </div>
     )
 }

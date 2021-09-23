@@ -7,9 +7,18 @@ const DELETE_POST = 'profileReducer/DELETE_POST'
 
 const initialState = {
     postsData: [
-        {message: 'Сегодня учу props', id: 3, likesCount: 10},
-        {message: 'Как дела?', id: 2, likesCount: 14},
-        {message: 'Привет всем!', id: 1, likesCount: 21},
+        {message: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.\n' +
+                '                                        Quis omnis aliquid unde saepe similique obcaecati eius aspernatur quibusdam.\n' +
+                '                                        Dolorem exercitationem ab possimus sed ad est libero tenetur cumque voluptas\n' +
+                '                                        voluptatum!', id: 3},
+        {message: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.\n' +
+                '                                        Quis omnis aliquid unde saepe similique obcaecati eius aspernatur quibusdam.\n' +
+                '                                        Dolorem exercitationem ab possimus sed ad est libero tenetur cumque voluptas\n' +
+                '                                        voluptatum!', id: 2},
+        {message: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.\n' +
+                '                                        Quis omnis aliquid unde saepe similique obcaecati eius aspernatur quibusdam.\n' +
+                '                                        Dolorem exercitationem ab possimus sed ad est libero tenetur cumque voluptas\n' +
+                '                                        voluptatum!', id: 1},
     ],
     profile: {},
     status: ''
@@ -21,7 +30,7 @@ const profileReducer = (state = initialState, action) => {
             return {
                 ...state,
                 postsData: [
-                    {message: messageBody, id: 4, likesCount: 0,}, ...state.postsData
+                    {message: messageBody, id: 4}, ...state.postsData
                 ],
             }
         }

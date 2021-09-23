@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {connect} from "react-redux";
 import {privateRoutes, publicRoutes} from "./routes/routes";
 import {Route,Switch,Redirect} from "react-router-dom";
-import Loader from "./UI/Loader";
+import Loader from "./UI/Loader/Loader";
 import {initializeApp} from "./redux/reducers/appReducer";
 
 const AppRouter = (props) => {

@@ -1,6 +1,34 @@
-.item {
+.post {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+}
 
+
+.postAbout {
+    max-width: 200px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
 }
-.item img{
-    width: 75px;
+
+
+.userAva {
+    margin-right: 15px;
 }
+
+.userAva img {
+    width: 60px;
+    height: 60px;
+}
+
+.userName {
+    font-size: 16px;
+    line-height: 18px;
+}
+
+.postBody {
+    margin-bottom: 10px;
+}
+
+

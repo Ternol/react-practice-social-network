@@ -1,0 +1,14 @@
+.myBtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    border: 1px solid #f85d46;
+    color: #f85d46;
+    font-weight: 600;
+    font-size: 16px;
+    height: 45px;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}

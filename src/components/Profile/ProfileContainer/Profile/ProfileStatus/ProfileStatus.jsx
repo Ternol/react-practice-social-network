@@ -20,7 +20,7 @@ const ProfileStatus = (props) => {
         <div className={s.about}>
             <div className={s.value}>{props.name}</div>
             {
-                props.userId !== props.authorizatedUserId && !editMode
+                props.userId !== props.authorizedUserId && !editMode
                     ? <div><span className={s.status}>{props?.status  || '-------'}</span></div>
                     : <div>
                         {!editMode
@@ -30,8 +30,7 @@ const ProfileStatus = (props) => {
                                     <img src={changeStatusIcon} alt="changeStatus"/>
                                 </div>
                             </div>
-                            : <div className="">
-                                <div className={s.statusInput}><input autoFocus
+                            : <div className={s.statusInput}><input autoFocus
                                           onBlur={() => {
                                               sendStatus()
                                               setEditMode(false)
@@ -39,27 +38,12 @@ const ProfileStatus = (props) => {
                                           }
                                           onChange={e => setTempStatus(e.target.value)}
                                           type="text"
-                                          value={tempStatus}/></div>
-
-                            </div>
+                                          value={tempStatus}/>
+                                </div>
                         }</div>
 
 
             }
-            {/*<div style={{cursor: 'pointer'}}><span onClick={*/}
-            {/*    () =>setEditMode(true)*/}
-            {/*}>{tempStatus || '-------'}</span></div>*/}
-            {/*{editMode &&*/}
-            {/*<div className="">*/}
-            {/*    <input autoFocus*/}
-            {/*           onBlur={()=> {sendStatus()*/}
-            {/*            setEditMode(false)}*/}
-            {/*           }*/}
-            {/*           onChange={e => setTempStatus(e.target.value)}*/}
-            {/*           type="text"*/}
-            {/*           value={tempStatus}/>*/}
-
-            {/*</div>}*/}
 
         </div>
     );

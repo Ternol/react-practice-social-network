@@ -16,22 +16,22 @@ const Header = (props) => {
                         <div className={s.logo}><img src={logo} alt="logo"/></div>
                         <div className={s.label}>Project for practice</div>
                     </div>
-                <div className={s.linksBlock}>
-                    {headerLinks.map(linkItem => <div className={s.linkItem} onClick={()=>router.push(linkItem.path)}>
-                        <img src={linkItem.icon}/>
-                        <p>{linkItem.text}</p>
-                    </div>)}
-                </div>
+                    <div className={s.linksBlock}>
+                        {headerLinks.map(linkItem => <div className={s.linkItem}
+                                                          key={linkItem.path}
+                                                          onClick={() => router.push(linkItem.path)}>
+                                                          <img src={linkItem.icon} alt=''/>
+                                                          <p>{linkItem.text}</p> </div>)}
+                    </div>
                     <div className={s.loginBlock}>
                         {props.isAuth
                             ?
                             <div>
                                 <div className={s.loginDropDown} onClick={props.logoutUser}><span>Exit</span></div>
                                 <span className={s.loginName}>{props.login}</span>
-                                <img src={arrDwnIcon}/>
+                                <img src={arrDwnIcon} alt={'arrowDwn'}/>
                             </div>
-
-                            : <div onClick={()=> router.push('/login/')}><span>LogIn</span></div>
+                            : <div onClick={() => router.push('/login/')}><span>LogIn</span></div>
                         }
                     </div>
                 </div>

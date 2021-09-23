@@ -11,7 +11,6 @@ const App = () => {
                 <div className="container">
                     <AppRouter />
                 </div>
-
             </main>
         </div>
     )

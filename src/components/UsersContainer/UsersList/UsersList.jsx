@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import Loader from "../../../UI/Loader";
+import Loader from "../../../UI/Loader/Loader";
 import Paginator from "../../common/Paginator";
 import User from "./User/User";
 
