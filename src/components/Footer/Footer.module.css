@@ -1,0 +1,23 @@
+.footer{
+    background-color: #fff;
+}
+.footerContainer{
+    max-width: 550px;
+    margin: 0 auto;
+    min-height: 50px;
+}
+.footerBody{
+    padding: 20px 0 5px 10px;
+    color: #343a40;
+}
+.about {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.about span{
+    margin-bottom: 10px;
+}
+.about a{
+    text-decoration: underline;
+}
