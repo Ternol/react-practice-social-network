@@ -7,13 +7,15 @@ import Footer from "./components/Footer/Footer";
 const App = () => {
     return (
         <div className="wrapper">
-            <HeaderContainer />
-            <main className="wrapper-content">
-                <div className="container">
-                    <AppRouter />
-                </div>
-            </main>
-            <Footer/>
+            <div className='site-content'>
+                <header><HeaderContainer/></header>
+                <main>
+                    <div className="container">
+                        <AppRouter/>
+                    </div>
+                </main>
+            </div>
+            <footer><Footer/></footer>
         </div>
     )
 }

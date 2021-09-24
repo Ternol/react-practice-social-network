@@ -1,13 +1,6 @@
-.header {
-    grid-area: header;
-    width: 100%;
-    background-color: #f85d46;
-    color: white;
-    height: 80px;
-}
 
 .headerBlock {
-    margin-top: 18px;
+    padding-top: 18px;
     display: flex;
     text-align: center;
     justify-content: space-between;

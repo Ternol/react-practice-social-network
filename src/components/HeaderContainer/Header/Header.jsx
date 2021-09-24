@@ -9,7 +9,6 @@ import {headerLinks} from "../../../routes/headerLinks";
 const Header = (props) => {
     const router = useHistory();
     return (
-        <header className={s.header}>
             <div className="container">
                 <div className={s.headerBlock}>
                     <div className={s.logoBlock}>
@@ -36,25 +35,6 @@ const Header = (props) => {
                     </div>
                 </div>
             </div>
-        </header>
-
-
-        // <header className={s.header}>
-        //     <img
-        //         src={logo}
-        //         alt="logo"/>
-        //     <div className={s.loginBlock}>
-        //         {
-        //             props.isAuth ? <div className={s.loginBlock__user}>
-        //                     <span>{props.login}</span>
-        //                     <div className={s.loginBlock_logout} onClick={props.logoutUser}>
-        //                         <span>Выйти</span>
-        //                     </div>
-        //             </div>
-        //                 : <NavLink to='/login'>Войти</NavLink>
-        //         }
-        //     </div>
-        // </header>
     )
 }
 export default Header;
