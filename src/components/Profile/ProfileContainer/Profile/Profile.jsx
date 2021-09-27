@@ -7,7 +7,11 @@ import s from './Profile.module.css';
 const Profile = (props) => {
     return (
         <div className={s.profile}>
-            <div className={s.profileCard}>< ProfileInfo profile={props.profile}/></div>
+            <div className={s.profileCard}>< ProfileInfo profile={props.profile}
+                                                         userId={props.userId}
+                                                         authorizedUserId={props.authorizedUserId}
+                                                         uploadPhoto={props.uploadPhoto}/>
+            </div>
             <div className={s.profileBody}>
                 < ProfileStatus status={props.status}
                                 name={props.profile.fullName}

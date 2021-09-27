@@ -3,11 +3,12 @@ import s from './Post.module.css';
 import defaultAva from './../../../../../../../img/defaultAva.png'
 
 const Post = (props) => {
+    const userAvatar = props.avatar || defaultAva;
     return (
         <div className={s.post}>
             <div className={s.postAbout}>
                 <div className={s.userAva}>
-                    <img src={defaultAva} alt="user avatar"/>
+                    <img src={userAvatar} alt="user avatar"/>
                 </div>
                 <div className={s.userName}>
                     <span>{props.userName}</span>

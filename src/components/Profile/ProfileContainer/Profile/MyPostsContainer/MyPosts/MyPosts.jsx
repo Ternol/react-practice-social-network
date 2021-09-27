@@ -6,10 +6,13 @@ import MyModal from "../../../../../../UI/MyModal/MyModal";
 import MyButton from "../../../../../../UI/MyButton/MyButton";
 
 const MyPosts = (props) => {
-    const [modalVisible,setModalVisible] = useState(false)
+    const [modalVisible, setModalVisible] = useState(false)
 
     const postsElements = props.postsData
-        .map(post => <Post userName={props.userName} message={post.message} likescount={post.likesCount} key={post.id}/>)
+        .map(post => <Post userName={props.userName}
+                           message={post.message}
+                           avatar={props.avatar}
+                           key={post.id}/>)
 
 
     return (
@@ -18,7 +21,8 @@ const MyPosts = (props) => {
                 ? <div><MyButton onClick={() => setModalVisible(true)}>Create post</MyButton>
                     <MyModal style={{maxHeight: '400px'}} visible={modalVisible} setVisible={setModalVisible}>
                         <NewPostForm addPost={props.addPost} setVisible={setModalVisible}/>
-                    </MyModal></div>
+                    </MyModal>
+                </div>
                 : null
             }
             <div className={s.posts}>

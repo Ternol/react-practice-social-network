@@ -7,7 +7,22 @@
     align-items: center;
     flex: 1 1 auto;
     border: 1px solid;
+    position: relative;
 }
+.profilePhotoBlock{
+
+}
+.uploadPhoto{
+    position: absolute;
+    right: 25px;
+    top: 10px;
+    cursor: pointer;
+}
+.uploadPhotoForm{
+    position: absolute;
+    top: -100%;
+}
+
 
 .profileImg img {
     width: 120px;

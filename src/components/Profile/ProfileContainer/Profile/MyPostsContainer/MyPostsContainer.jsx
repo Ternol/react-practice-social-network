@@ -4,9 +4,10 @@ import {addPost} from "../../../../../redux/reducers/profileReducer";
 
 const mapStateToProps = (state) => ({
     postsData: state.profilePage.postsData,
+    avatar: state.profilePage.profile?.photos?.small,
     authorizedUserId: state.auth.id,
     userId: state.profilePage.profile.userId,
-    userName: state.profilePage.profile.fullName
+    userName: state.profilePage.profile.fullName,
 })
 
 

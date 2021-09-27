@@ -1,4 +1,5 @@
 import axios from "axios";
+import {Form} from "formik";
 
 const instance = axios.create({
     withCredentials: true,
@@ -60,8 +61,17 @@ export const profileAPI = {
         })
     },
     updateMyStatus(status) {
-        return instance.put('profile/status/', {status: status})
-    }
+        return instance.put('profile/status/', {status})
+    },
+    uploadPhoto(photoFile) {
+        const formData = new FormData();
+        formData.append('image',photoFile)
+        return instance.put('profile/photo', formData, {
+            headers: {
+                'Content-Type' : 'multipart/form-data'
+            }
+        })
+    },
 }
 
 
