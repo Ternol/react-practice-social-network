@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import logo from './../../../img/icons/logo-32.png'
 import arrDwnIcon from './../../../img/icons/arrow-16.png'
 import s from './header.module.css';

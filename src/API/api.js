@@ -1,5 +1,4 @@
 import axios from "axios";
-import {Form} from "formik";
 
 const instance = axios.create({
     withCredentials: true,
@@ -88,13 +87,21 @@ export const authAPI = {
                 if(response.status === 200) return response
             })
     },
-    login(email, password, rememberMe=false) {
+    login(email, password, rememberMe=false,captcha=null) {
+
         return instance.post('auth/login', {
-            email, password, rememberMe
+            email, password, rememberMe,captcha
         })
             .then(response => {
             if(response.status === 200) return response
             })
+    },
+    getCaptcha() {
+        return instance('security/get-captcha-url').then(
+            response => {
+                if (response.status === 200) return response
+            }
+        )
     }
 }
 

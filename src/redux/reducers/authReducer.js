@@ -1,12 +1,14 @@
 import {authAPI} from "../../API/api";
 
 const SET_USER_DATA = 'authReducer/SET_USER_DATA';
+const GET_CAPTCHA_SUCCESS = 'authReducer/GET_CAPTCHA_SUCCESS';
 
 const initialState = {
     id: null,
     login: null,
     email: null,
-    isAuth: false
+    isAuth: false,
+    captchaUrl: null,
 };
 
 
@@ -15,11 +17,16 @@ const authReducer = (state = initialState, action) => {
         case SET_USER_DATA: {
             return {...state, ...action.authorizatedUserData}
         }
+        case GET_CAPTCHA_SUCCESS: {
+            return {...state, captchaUrl: action.url}
+        }
         default:
             return state;
     }
 
 }
+
+export default authReducer;
 
 export const setAuthUserData = (id, email, login, isAuth) => ({
     type: SET_USER_DATA, authorizatedUserData: {
@@ -27,8 +34,11 @@ export const setAuthUserData = (id, email, login, isAuth) => ({
     }
 })
 
+export const getCaptchaSuccess = (url) => ({
+    type: GET_CAPTCHA_SUCCESS, url
+})
 
-export default authReducer;
+
 
 export const authMe = () => async (dispatch) => {
     const response = await authAPI.setAuthData()
@@ -44,13 +54,20 @@ export const logoutUser = () => async (dispatch) => {
         dispatch(setAuthUserData(null, null, null, false))
     }
 }
-export const loginUser = (email, password, rememberMe, setStatus) => async (dispatch) => {
-    const response = await authAPI.login(email, password, rememberMe)
+export const loginUser = (email, password, rememberMe,captcha, setStatus) => async (dispatch) => {
+    const response = await authAPI.login(email, password, rememberMe,captcha)
     if (response.data.resultCode === 0) {
         dispatch(authMe())
     } else {
-        setStatus(response.data.messages)
+        if (response.data.resultCode === 10) {
+            dispatch(getCaptcha())
+        }
+        setStatus(response.data.messages[0])
     }
+}
+export const getCaptcha = () => async (dispatch) => {
+    const response = await authAPI.getCaptcha()
+    dispatch(getCaptchaSuccess(response.data.url))
 }
 
 

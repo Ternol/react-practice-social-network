@@ -1,6 +1,7 @@
 
 input[type='password'],
 input[type='email'],
+input[type='text'],
 textarea {
     display: block;
     padding: 6px 12px;
@@ -16,4 +17,25 @@ textarea {
 
 .error {
     color: red;
+}
+
+.form-control{
+    margin-bottom: 20px;
+}
+.form-checkbox{
+    display: flex;
+}
+.form-checkbox label{
+    padding-right: 10px;
+}
+.captcha-block {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.captcha-block img {
+    width: 200px;
+    height: 100px;
+    padding-bottom: 10px;
 }
