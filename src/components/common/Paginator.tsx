@@ -1,7 +1,20 @@
 import s from './paginator.module.css'
 import React, {useState} from 'react';
+import {useTypedSelector} from "../../hooks/useTypedSelector";
+import {useDispatch} from "react-redux";
+import {changePage} from "../../redux/reducers/usersReducer";
 
-const Paginator = ({totalItemsCount,pageSize,changePage,currentPage,portionSize=20}) => {
+type PropsType = {
+    totalItemsCount : number
+    portionSize?: number
+}
+
+
+const Paginator: React.FC<PropsType> = ({totalItemsCount,portionSize=20}) => {
+
+    const {pageSize,currentPage} = useTypedSelector(state => state.usersPage)
+    const dispatch = useDispatch()
+
     const pagesCount = Math.ceil(totalItemsCount / pageSize);
     const portionCount = Math.ceil(pagesCount/portionSize);
 
@@ -11,23 +24,21 @@ const Paginator = ({totalItemsCount,pageSize,changePage,currentPage,portionSize=
     const portionLastPageNumber = portionNumber * portionSize
 
 
-    const pages = [];
+    const pages: Array<number> = [];
 
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
     }
 
-    const onPageChanged = (pageNumber) => {
-        changePage(pageNumber, pageSize)
-    }
+
         return (
             <div className={s.wrap}>
                 {portionNumber > 1 && <button className={s.navPageBtn} onClick={()=> setPortionNumber(portionNumber - 1)}>Сюда</button> }
                 {pages.filter(p => p>=portionFirstPageNumber && p <= portionLastPageNumber)
                     .map(p => <span key={p}
                                       style={{padding: 4, cursor: 'pointer'}}
-                                      className={currentPage === p ? s.selectedPage : null}
-                                      onClick={() => onPageChanged(p)}>{p}</span>)}
+                                      className={currentPage === p ? s.selectedPage : undefined}
+                                      onClick={() => dispatch(changePage(p))}>{p}</span>)}
                 {portionCount > portionNumber && <button className={s.navPageBtn} onClick={()=> setPortionNumber(portionNumber + 1)}>Туда</button>}
             </div>
         );

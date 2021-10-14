@@ -1,30 +1,47 @@
 import {profileAPI} from "../../API/api";
+import {ProfileType, UserDataPhotosType} from "../../types/userReducerTypes";
 
 const ADD_POST = 'profileReducer/ADD-POST';
 const SET_USER_PROFILE = 'profileReducer/SET_USER_PROFILE';
 const GET_STATUS = 'profileReducer/GET_STATUS';
 const DELETE_POST = 'profileReducer/DELETE_POST';
 const SET_PHOTOS = 'profileReducer/SET_PHOTOS';
+export type InitialStateType = {
+    postsData: Array<PostsDataStateType>
+    profile: ProfileType,
+    status: string
+}
 
-const initialState = {
+
+type PostsDataStateType = {
+    message: string,
+    id: number
+}
+const initialState: InitialStateType = {
     postsData: [
-        {message: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.\n' +
+        {
+            message: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.\n' +
                 '                                        Quis omnis aliquid unde saepe similique obcaecati eius aspernatur quibusdam.\n' +
                 '                                        Dolorem exercitationem ab possimus sed ad est libero tenetur cumque voluptas\n' +
-                '                                        voluptatum!', id: 3},
-        {message: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.\n' +
+                '                                        voluptatum!', id: 3
+        },
+        {
+            message: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.\n' +
                 '                                        Quis omnis aliquid unde saepe similique obcaecati eius aspernatur quibusdam.\n' +
                 '                                        Dolorem exercitationem ab possimus sed ad est libero tenetur cumque voluptas\n' +
-                '                                        voluptatum!', id: 2},
-        {message: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.\n' +
+                '                                        voluptatum!', id: 2
+        },
+        {
+            message: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.\n' +
                 '                                        Quis omnis aliquid unde saepe similique obcaecati eius aspernatur quibusdam.\n' +
                 '                                        Dolorem exercitationem ab possimus sed ad est libero tenetur cumque voluptas\n' +
-                '                                        voluptatum!', id: 1},
+                '                                        voluptatum!', id: 1
+        },
     ],
-    profile: {},
+    profile: {} as ProfileType,
     status: ''
 }
-const profileReducer = (state = initialState, action) => {
+const profileReducer = (state = initialState, action: any): InitialStateType => {
     switch (action.type) {
         case ADD_POST : {
             let messageBody = action.newPostText;
@@ -48,7 +65,7 @@ const profileReducer = (state = initialState, action) => {
             return {...state, status: action.status}
         }
         case SET_PHOTOS : {
-            return {...state, profile: {...state.profile, photos: action.photos}}
+            return {...state, profile: {...state.profile, photos: action.photos} as ProfileType}
         }
         default:
             return state;
@@ -58,39 +75,64 @@ const profileReducer = (state = initialState, action) => {
 
 export default profileReducer;
 
-export const addPost = (newPostText) => ({
+type AddPostActionType = {
+    type: typeof ADD_POST
+    newPostText: string
+}
+export const addPost = (newPostText: string): AddPostActionType => ({
     type: ADD_POST, newPostText
 })
 
-export const deletePost = (postId) => ({
+type DeletePostActionType = {
+    type: typeof DELETE_POST,
+    postId: number
+}
+
+export const deletePost = (postId: number): DeletePostActionType => ({
     type: DELETE_POST, postId
 })
 
-export const setUserProfile = (profile) => ({
+type SetUserProfileActionType = {
+    type: typeof SET_USER_PROFILE,
+    profile: ProfileType
+}
+export const setUserProfile = (profile: ProfileType): SetUserProfileActionType => ({
     type: SET_USER_PROFILE,
     profile
 })
-export const setStatusToState = (status) => ({
+type SetStatusToStateActionType = {
+    type: typeof GET_STATUS,
+    status: string
+}
+
+export const setStatusToState = (status: string): SetStatusToStateActionType => ({
     type: GET_STATUS,
     status
 })
-export const setPhotosToState = (photos) => ({
+
+type SetPhotosToStateActionType = {
+    type: typeof SET_PHOTOS,
+    photos: UserDataPhotosType
+}
+
+
+export const setPhotosToState = (photos: UserDataPhotosType): SetPhotosToStateActionType => ({
     type: SET_PHOTOS,
     photos
 })
 
 
-export const setProfile = (userId) => async (dispatch) => {
-    const response = await profileAPI.getUserProfile(userId)
+export const setProfile = (userId: number) => async (dispatch: any) => {
+    const response: any = await profileAPI.getUserProfile(userId)
 
     dispatch(setUserProfile(response.data))
 
 }
-export const getStatus = (status) => async (dispatch) => {
-    const response = await profileAPI.getStatus(status)
+export const getStatus = (status: string) => async (dispatch: any) => {
+    const response: any = await profileAPI.getStatus(status)
     dispatch(setStatusToState(response.data))
 }
-export const updateStatus = (status) => async (dispatch) => {
+export const updateStatus = (status: string) => async (dispatch: any) => {
     const response = await profileAPI.updateMyStatus(status)
 
     if (response.data.resultCode === 0) {
@@ -98,7 +140,7 @@ export const updateStatus = (status) => async (dispatch) => {
     }
 
 }
-export const uploadPhoto = (photo) => async (dispatch) => {
+export const uploadPhoto = (photo: object) => async (dispatch: any) => {
     const response = await profileAPI.uploadPhoto(photo)
     if (response.data.resultCode === 0) {
         dispatch(setPhotosToState(response.data.data.photos))

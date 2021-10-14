@@ -1,9 +1,19 @@
-import React from 'react';
+import React, {FC} from 'react';
 import s from './user.module.css';
-import userPhoto from "../../../../img/defaultAva.png";
+import userPhoto from "../../../img/defaultAva.png";
 import {useHistory} from "react-router-dom";
+import {UserDataType} from "../../../types/userReducerTypes";
+import {useTypedSelector} from "../../../hooks/useTypedSelector";
+import {useDispatch} from "react-redux";
+import {follow, unFollow} from "../../../redux/reducers/usersReducer";
 
-const User = ({user,isFollowingInProgress,unFollow,follow}) => {
+type PropsType = {
+    user:UserDataType,
+}
+
+const User:FC<PropsType> = ({user}) => {
+    const isFollowingInProgress = useTypedSelector(state => state.usersPage.isFollowingInProgress)
+    const dispatch = useDispatch()
     const router = useHistory();
     return <div className={s.userCard}>
         <div className={s.userFollow}>
@@ -15,11 +25,11 @@ const User = ({user,isFollowingInProgress,unFollow,follow}) => {
                 {
                     user.followed ? <button
                             disabled={isFollowingInProgress.some(id => id === user.id)}
-                            onClick={() => unFollow(user.id)}>Отписаться</button>
+                            onClick={() => {dispatch(unFollow(user.id))}}>Отписаться</button>
 
                         : <button
                             disabled={isFollowingInProgress.some(id => id === user.id)}
-                            onClick={() => follow(user.id)}>Подписаться</button>
+                            onClick={() => dispatch(follow(user.id))}>Подписаться</button>
                 }
             </div>
         </div>
@@ -28,7 +38,6 @@ const User = ({user,isFollowingInProgress,unFollow,follow}) => {
                 <span className={s.user__name}>{user.name}</span>
                 <span className={s.user__status}>{user.status}</span>
             </div>
-            <div className={s.user__location}>{user.location = 'Не указано'}</div>
         </div>
     </div>
 
