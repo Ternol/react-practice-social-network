@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/react-practice-social-network/static/css/main.cea3f510.chunk.css",
-    "main.js": "/react-practice-social-network/static/js/main.0782b0bf.chunk.js",
-    "main.js.map": "/react-practice-social-network/static/js/main.0782b0bf.chunk.js.map",
+    "main.js": "/react-practice-social-network/static/js/main.e314c063.chunk.js",
+    "main.js.map": "/react-practice-social-network/static/js/main.e314c063.chunk.js.map",
     "runtime-main.js": "/react-practice-social-network/static/js/runtime-main.1c19066d.js",
     "runtime-main.js.map": "/react-practice-social-network/static/js/runtime-main.1c19066d.js.map",
     "static/js/2.e4aaedd9.chunk.js": "/react-practice-social-network/static/js/2.e4aaedd9.chunk.js",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.1c19066d.js",
     "static/js/2.e4aaedd9.chunk.js",
     "static/css/main.cea3f510.chunk.css",
-    "static/js/main.0782b0bf.chunk.js"
+    "static/js/main.e314c063.chunk.js"
   ]
 }
