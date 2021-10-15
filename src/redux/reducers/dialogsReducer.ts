@@ -26,7 +26,7 @@ const initialState:InitialStateType = {
 
 
 
-const dialogsReducer = (state = initialState, action:any):InitialStateType => {
+const dialogsReducer = (state = initialState, action:AddMessageType):InitialStateType => {
     switch (action.type) {
         case ADD_MESSAGE :
             const newMessageBody = action.text

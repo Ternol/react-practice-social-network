@@ -45,7 +45,7 @@ export const profileAPI = {
             return instance(`profile/${userId}`)
                 .then(response => {
                     if (response.status === 200) {
-                        return response
+                        return response.data
                     }
                 })
         } catch {
@@ -55,7 +55,7 @@ export const profileAPI = {
     getStatus(userId) {
         return instance('profile/status/' + userId).then(response => {
             if (response.status === 200) {
-                return response
+                return response.data
             }
         })
     },
@@ -78,13 +78,13 @@ export const authAPI = {
     setAuthData() {
         return instance('auth/me')
             .then(response => {
-                if (response.status === 200) return response
+                if (response.status === 200) return response.data
             })
     },
     logout() {
         return instance.delete('auth/login')
             .then(response => {
-                if(response.status === 200) return response
+                if(response.status === 200) return response.data
             })
     },
     login(email, password, rememberMe=false,captcha=null) {
@@ -93,13 +93,13 @@ export const authAPI = {
             email, password, rememberMe,captcha
         })
             .then(response => {
-            if(response.status === 200) return response
+            if(response.status === 200) return response.data
             })
     },
     getCaptcha() {
         return instance('security/get-captcha-url').then(
             response => {
-                if (response.status === 200) return response
+                if (response.status === 200) return response.data
             }
         )
     }

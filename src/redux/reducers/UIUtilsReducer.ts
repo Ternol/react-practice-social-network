@@ -6,7 +6,7 @@ const initialState:InitialStateType = {
     isLoading: false
 }
 
-const UIUtilsReducer = (state = initialState, action:any):InitialStateType => {
+const UIUtilsReducer = (state = initialState, action:ShowLoaderType):InitialStateType => {
     switch (action.type) {
         case SET_LOADER:
             return {
