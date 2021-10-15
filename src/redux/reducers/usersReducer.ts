@@ -15,6 +15,7 @@ import {updateObjectInArray} from "../../utils/object-helpers";
 import {Dispatch} from "redux";
 import { ThunkAction } from "redux-thunk";
 import {AppStateType} from "../reduxStore";
+import {resultCodes} from "../../API/apiTypes";
 
 export type InitialStateType = {
     usersData: Array<UserDataType>,
@@ -120,8 +121,10 @@ type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, userReducerAc
 export const getUsers = (currentPage:number, pageSize:number):ThunkType => async (dispatch:DispatchType) => {
     dispatch(showLoader(true))
     const response = await usersAPI.getUsers(currentPage, pageSize)
-    dispatch(setUsers(response.items));
-    dispatch(setTotalUsersCount(response.totalCount));
+    if (response) {
+        dispatch(setUsers(response.items));
+        dispatch(setTotalUsersCount(response.totalCount));
+    }
     dispatch(showLoader(false))
 }
 
@@ -129,14 +132,16 @@ export const changePage = (pageNumber:number, pageSize?:number):ThunkType => asy
     dispatch(showLoader(true))
     dispatch(setPage(pageNumber))
     const response = await usersAPI.changePage(pageNumber, pageSize)
-    dispatch(setUsers(response.items));
+    if (response) {
+        dispatch(setUsers(response.items));
+    }
     dispatch(showLoader(false))
 }
 const _followUnfollowFlow = async (dispatch:DispatchType, userId:number,
                                    apiMethod:any, actionCreator:any) => {
     dispatch(toggleFollowingInProgress(true, userId))
     const response = await apiMethod(userId)
-    if (response.resultCode === 0) {
+    if (response.resultCode === resultCodes.Success) {
         dispatch(actionCreator(userId))
     }
     dispatch(toggleFollowingInProgress(false, userId))

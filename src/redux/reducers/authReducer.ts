@@ -8,6 +8,7 @@ import {
 import {Dispatch} from "redux";
 import {ThunkAction} from "redux-thunk";
 import {AppStateType} from "../reduxStore";
+import {captchaRequired, resultCodes} from "../../API/apiTypes";
 
 
 const initialState:InitialStateType = {
@@ -57,7 +58,7 @@ type DispatchType = authReducerActionsTypes
 
 export const authMe = ():ThunkType => async (dispatch:Dispatch<DispatchType>) => {
     const response = await authAPI.setAuthData()
-    if (response.resultCode === 0) {
+    if (response && response.resultCode === resultCodes.Success) {
         const {id, login, email} = response.data
         dispatch(setAuthUserData(id, email, login, true))
     }
@@ -66,7 +67,7 @@ export const authMe = ():ThunkType => async (dispatch:Dispatch<DispatchType>) =>
 
 export const logoutUser = ():ThunkType => async (dispatch:Dispatch<DispatchType>) => {
     const response = await authAPI.logout()
-    if (response.resultCode === 0) {
+    if (response && response.resultCode === resultCodes.Success) {
         dispatch(setAuthUserData(null, null, null, false))
     }
 }
@@ -76,18 +77,20 @@ export const loginUser =
     (email:string, password:string, rememberMe:boolean,captcha:any, setStatus:any):ThunkType =>
     async (dispatch:any) => {
     const response = await authAPI.login(email, password, rememberMe,captcha)
-    if (response.resultCode === 0) {
+    if (response && response.resultCode === resultCodes.Success) {
         dispatch(authMe())
     } else {
-        if (response.resultCode === 10) {
+        if (response && response.resultCode === captchaRequired.true) {
             dispatch(getCaptcha())
         }
-        setStatus(response.messages[0])
+        setStatus(response?.messages[0])
     }
 }
 export const getCaptcha = ():ThunkType => async (dispatch:any) => {
     const response = await authAPI.getCaptcha()
-    dispatch(getCaptchaSuccess(response.url))
+    if(!!response){
+        dispatch(getCaptchaSuccess(response.url))
+    }
 }
 
 

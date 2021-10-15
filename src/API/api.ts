@@ -1,4 +1,12 @@
 import axios from "axios";
+import {ProfileType} from "../types/userReducerTypes";
+import {
+    defaultResponseType,
+    getCaptchaResponseType,
+    getUsersResponseType, loginResponseType,
+    setAuthDataType,
+    uploadPhotoResponseType
+} from "./apiTypes";
 
 const instance = axios.create({
     withCredentials: true,
@@ -9,29 +17,31 @@ const instance = axios.create({
 })
 
 
+
+
 export const usersAPI = {
     getUsers(pageNumber = 1, pageSize = 100) {
-        return instance(`users/?page=${pageNumber}&count=${pageSize}`)
+        return instance.get<getUsersResponseType>(`users/?page=${pageNumber}&count=${pageSize}`)
             .then(response => {
                 if (response.status === 200) return response.data
             })
     },
 
-    changePage(pageNumber, pageSize = 100) {
-        return instance(`users/?page=${pageNumber}&count=${pageSize}`)
+    changePage(pageNumber:number, pageSize = 100) {
+        return instance.get<getUsersResponseType>(`users/?page=${pageNumber}&count=${pageSize}`)
             .then(response => {
                 if (response.status === 200) return response.data
             })
     },
 
-    unFollowUser(userId) {
-        return instance.delete(`follow/${userId}`)
+    unFollowUser(userId:number) {
+        return instance.delete<defaultResponseType>(`follow/${userId}`)
             .then(response => {
                 if (response.status === 200) return response.data
             })
     },
-    followUser(userId) {
-        return instance.post(`/follow/${userId}`)
+    followUser(userId:number) {
+        return instance.post<defaultResponseType>(`/follow/${userId}`)
             .then(response => {
                 if (response.status === 200) return response.data
             })
@@ -39,10 +49,11 @@ export const usersAPI = {
 
 }
 
+
 export const profileAPI = {
-    getUserProfile(userId, message = `Не удалось получить данные пользователя id: ${userId}`) {
+    getUserProfile(userId:number, message = `Не удалось получить данные пользователя id: ${userId}`) {
         try {
-            return instance(`profile/${userId}`)
+            return instance.get<ProfileType>(`profile/${userId}`)
                 .then(response => {
                     if (response.status === 200) {
                         return response.data
@@ -52,20 +63,20 @@ export const profileAPI = {
             alert(message)
         }
     },
-    getStatus(userId) {
-        return instance('profile/status/' + userId).then(response => {
+    getStatus(userId:number) {
+        return instance.get<string>(`profile/status/${userId}`).then(response => {
             if (response.status === 200) {
                 return response.data
             }
         })
     },
-    updateMyStatus(status) {
-        return instance.put('profile/status/', {status})
+    updateMyStatus(status:string) {
+        return instance.put<defaultResponseType>('profile/status/', {status})
     },
-    uploadPhoto(photoFile) {
+    uploadPhoto(photoFile:any) {
         const formData = new FormData();
         formData.append('image',photoFile)
-        return instance.put('profile/photo', formData, {
+        return instance.put<uploadPhotoResponseType>('profile/photo', formData, {
             headers: {
                 'Content-Type' : 'multipart/form-data'
             }
@@ -74,22 +85,23 @@ export const profileAPI = {
 }
 
 
+
 export const authAPI = {
     setAuthData() {
-        return instance('auth/me')
+        return instance.get<setAuthDataType>('auth/me')
             .then(response => {
                 if (response.status === 200) return response.data
             })
     },
     logout() {
-        return instance.delete('auth/login')
+        return instance.delete<defaultResponseType>('auth/login')
             .then(response => {
                 if(response.status === 200) return response.data
             })
     },
-    login(email, password, rememberMe=false,captcha=null) {
+    login(email:string, password:string, rememberMe=false,captcha=null) {
 
-        return instance.post('auth/login', {
+        return instance.post<loginResponseType>('auth/login', {
             email, password, rememberMe,captcha
         })
             .then(response => {
@@ -97,7 +109,7 @@ export const authAPI = {
             })
     },
     getCaptcha() {
-        return instance('security/get-captcha-url').then(
+        return instance.get<getCaptchaResponseType>('security/get-captcha-url').then(
             response => {
                 if (response.status === 200) return response.data
             }

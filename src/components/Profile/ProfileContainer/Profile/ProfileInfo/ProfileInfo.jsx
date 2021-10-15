@@ -12,6 +12,7 @@ import github from './../../../../../img/icons/social-links/github-16.png';
 import cameraIcon from './../../../../../img/icons/camera-32.png'
 
 const ProfileInfo = (props) => {
+    const userAvatar = props.profile?.photos?.large || defaultAva
 
     const socialLinks = [
         {alt:'facebook', img:facebook, link:props.profile?.contacts?.facebook},
@@ -28,14 +29,13 @@ const ProfileInfo = (props) => {
         return <Loader/>
     }
 
-    const userAvatar = props.profile?.photos?.large || defaultAva
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const inputUpload = useRef(null)
 
     const onPhotoUploadHandler = (e) => {
         if (e.target.files.length) {
-            props.uploadPhoto(e.target.files[0])
+            props.uploadPhoto(e.target.files[0], props.userId)
         }
     }
 
@@ -72,7 +72,7 @@ const ProfileInfo = (props) => {
                 </div>
                 <div className={s.linkItem}>
                     {socialLink.link
-                        ? <span className={s.linkBody}>
+                        ? <span className={s.link}>
                             <a target="_blank" href={socialLink.link} rel="noreferrer">Show link</a></span>
                         : <span>No info</span>
                     }

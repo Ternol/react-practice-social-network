@@ -13,6 +13,7 @@ import {
 import {Dispatch} from "redux";
 import {ThunkAction} from "redux-thunk";
 import {AppStateType} from "../reduxStore";
+import {resultCodes} from "../../API/apiTypes";
 
 const initialState: InitialStateType = {
     postsData: [
@@ -96,31 +97,31 @@ export const setPhotosToState = (photos: UserDataPhotosType): SetPhotosToStateAc
     photos
 })
 
+
 type DispatchType = ProfileReducerActionsTypes
 type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ProfileReducerActionsTypes>
 
 export const setProfile = (userId: number):ThunkType => async (dispatch: Dispatch<DispatchType>) => {
     const response= await profileAPI.getUserProfile(userId)
-
-    dispatch(setUserProfile(response))
-
+    if (response) dispatch(setUserProfile(response))
 }
-export const getStatus = (status: string):ThunkType => async (dispatch: Dispatch<DispatchType>) => {
-    const response = await profileAPI.getStatus(status)
-    dispatch(setStatusToState(response))
+
+export const getStatus = (userId: number):ThunkType => async (dispatch: Dispatch<DispatchType>) => {
+    const response = await profileAPI.getStatus(userId)
+    if (response) dispatch(setStatusToState(response))
 }
 export const updateStatus = (status: string):ThunkType => async (dispatch: Dispatch<DispatchType>) => {
     const response = await profileAPI.updateMyStatus(status)
 
-    if (response.data.resultCode === 0) {
+    if (response.data.resultCode === resultCodes.Success) {
         dispatch(setStatusToState(status))
     }
-
 }
-export const uploadPhoto = (photo: object):ThunkType => async (dispatch: Dispatch<DispatchType>) => {
+export const uploadPhoto = (photo: object, userId:number):ThunkType => async (dispatch: Dispatch<DispatchType>) => {
     const response = await profileAPI.uploadPhoto(photo)
-    if (response.data.resultCode === 0) {
-        dispatch(setPhotosToState(response.data.data.photos))
+    if (!!response && response.data.resultCode === resultCodes.Success) {
+        dispatch(setPhotosToState(response.data.data))
+            const profileData= await profileAPI.getUserProfile(userId)
+            if (profileData) dispatch(setUserProfile(profileData))
     }
-
 }
