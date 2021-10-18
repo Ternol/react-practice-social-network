@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import s from './ProfileStatus.module.css'
 import changeStatusIcon from '../../../img/icons/changeStatus-24.png'
 import {useTypedSelector} from "../../../hooks/useTypedSelector";
@@ -10,7 +10,7 @@ type PropsType = {
     userId: number
 }
 
-const ProfileStatus = (props: PropsType) => {
+const ProfileStatus:FC<PropsType> = ({userId}) => {
 
     const {fullName} = useTypedSelector(state => state.profilePage.profile)
     const status = useTypedSelector(state => state.profilePage.status)
@@ -35,8 +35,7 @@ const ProfileStatus = (props: PropsType) => {
     return (
         <div className={s.about}>
             <div className={s.value}>{fullName}</div>
-            {
-                props.userId !== authorizedUserId && !editMode
+            {userId !== authorizedUserId && !editMode
                     ? <div><span className={s.status}>{status || '--------'} </span></div>
                     : <div>
                         {!editMode

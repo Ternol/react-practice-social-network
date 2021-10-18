@@ -1,10 +1,10 @@
-import React from "react";
+import React, {FC} from "react";
 import './App.css';
 import AppRouter from "./AppRouter";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
 
-const App = () => {
+const App:FC = () => {
     return (
         <div className="wrapper">
             <div className='site-content'>

@@ -1,4 +1,4 @@
-import React, {SyntheticEvent, useRef} from 'react'
+import React, {FC, SyntheticEvent, useRef} from 'react'
 import defaultAva from '../../../img/defaultAva.png'
 import Loader from "../../../UI/Loader/Loader";
 import s from './profileInfo.module.css';
@@ -21,24 +21,24 @@ type PropsType = {
     authorizedUserId: number | null
 }
 
-const ProfileInfo = (props: PropsType) => {
-    const userAvatar = props.profile?.photos?.large || defaultAva
+const ProfileInfo:FC<PropsType> = ({userId,profile,authorizedUserId}) => {
+    const userAvatar = profile?.photos?.large || defaultAva
 
     const inputUpload = useRef<HTMLInputElement>(null)
     const dispatch = useDispatch()
 
     const socialLinks = [
-        {alt: 'facebook', img: facebook, link: props.profile?.contacts?.facebook},
-        {alt: 'website', img: website, link: props.profile?.contacts?.website},
-        {alt: 'vk', img: vk, link: props.profile?.contacts?.vk},
-        {alt: 'twitter', img: twitter, link: props.profile?.contacts?.twitter},
-        {alt: 'instagram', img: instagram, link: props.profile?.contacts?.instagram},
-        {alt: 'youtube', img: youtube, link: props.profile?.contacts?.youtube},
-        {alt: 'github', img: github, link: props.profile?.contacts?.github},
+        {alt: 'facebook', img: facebook, link: profile?.contacts?.facebook},
+        {alt: 'website', img: website, link: profile?.contacts?.website},
+        {alt: 'vk', img: vk, link: profile?.contacts?.vk},
+        {alt: 'twitter', img: twitter, link: profile?.contacts?.twitter},
+        {alt: 'instagram', img: instagram, link: profile?.contacts?.instagram},
+        {alt: 'youtube', img: youtube, link: profile?.contacts?.youtube},
+        {alt: 'github', img: github, link: profile?.contacts?.github},
     ]
 
 
-    if (!props.profile) {
+    if (!profile) {
         return <Loader/>
     }
 
@@ -46,12 +46,12 @@ const ProfileInfo = (props: PropsType) => {
     const onPhotoUploadHandler = (e: SyntheticEvent<EventTarget>) => {
         const formInput = (e.target as HTMLFormElement).files[0]
         if (formInput) {
-            dispatch(uploadPhoto(formInput, props.userId))
+            dispatch(uploadPhoto(formInput, userId))
         }
     }
 
     return <div className={s.profileCard}>
-        {props.userId === props.authorizedUserId
+        {userId === authorizedUserId
             ? <div className={s.profilePhotoBlock}>
                 <div className={s.uploadPhoto} onClick={() => inputUpload.current?.click()}><img src={cameraIcon}
                                                                                                  alt=""/></div>
@@ -74,10 +74,10 @@ const ProfileInfo = (props: PropsType) => {
 
 
         <div className={s.profileInfo}>
-            <p><span className={s.info}>ID: </span><span className={s.value}>{props.profile?.userId || 'test ID'}</span>
+            <p><span className={s.info}>ID: </span><span className={s.value}>{profile?.userId || 'test ID'}</span>
             </p>
             <p><span className={s.info}>Looking for a job: </span><span
-                className={s.value}>{props.profile?.lookingForAJob ? 'Yes' : 'No'}</span></p>
+                className={s.value}>{profile?.lookingForAJob ? 'Yes' : 'No'}</span></p>
         </div>
         <div className={s.profileLinks}>
             {socialLinks.map(socialLink => <div className={s.link} key={socialLink.alt}>

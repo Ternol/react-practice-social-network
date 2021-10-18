@@ -1,5 +1,5 @@
 import s from './paginator.module.css'
-import React, {useState} from 'react';
+import React, {FC, useState} from 'react';
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {useDispatch} from "react-redux";
 import {changePage} from "../../redux/reducers/usersReducer";
@@ -10,7 +10,7 @@ type PropsType = {
 }
 
 
-const Paginator: React.FC<PropsType> = ({totalItemsCount,portionSize=20}) => {
+const Paginator: FC<PropsType> = ({totalItemsCount,portionSize=20}) => {
 
     const {pageSize,currentPage} = useTypedSelector(state => state.usersPage)
     const dispatch = useDispatch()

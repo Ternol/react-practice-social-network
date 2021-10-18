@@ -1,8 +1,8 @@
 import Settings from "../components/Settings/Settings";
-import Login from "../components/Login/Login";
 import UsersList from "../components/UsersList/UsersList";
 import Profile from "../components/Profile/Profile";
 import Dialogs from "../components/Dialogs/Dialogs";
+import Login from "../components/Login/Login";
 
 
 

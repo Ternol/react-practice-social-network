@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {FC} from 'react'
 import s from './Post.module.css';
 import defaultAva from '../../../../img/defaultAva.png'
 
@@ -9,9 +9,9 @@ type PropsType = {
     messages: string
 }
 
-const Post = (props:PropsType) => {
+const Post:FC<PropsType> = ({avatar,userName,messages}) => {
 
-    const userAvatar = props.avatar ? props.avatar : defaultAva
+    const userAvatar = avatar ? avatar : defaultAva
 
     return (
         <div className={s.post}>
@@ -20,10 +20,10 @@ const Post = (props:PropsType) => {
                     <img src={userAvatar} alt="user avatar"/>
                 </div>
                 <div className={s.userName}>
-                    <span>{props.userName}</span>
+                    <span>{userName}</span>
                 </div>
             </div>
-            <div className={s.postBody}><span>{props.messages}</span>
+            <div className={s.postBody}><span>{messages}</span>
             </div>
         </div>
     )

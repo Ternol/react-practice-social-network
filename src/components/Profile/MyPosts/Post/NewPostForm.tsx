@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {useFormik} from 'formik'
 import * as Yup from 'yup'
 import MyButton from "../../../../UI/MyButton/MyButton";
@@ -9,7 +9,7 @@ type PropsType = {
     setVisible: (a:boolean)=>void
 }
 
-const NewPostForm = (props:PropsType) => {
+const NewPostForm:FC<PropsType> = ({setVisible}) => {
     const dispatch = useDispatch()
 
     const initialValues = {
@@ -18,7 +18,7 @@ const NewPostForm = (props:PropsType) => {
     const onSubmit = (values: typeof initialValues, onSubmitProps:any) => {
         dispatch(addPost(values.textarea));
         onSubmitProps.resetForm();
-        props.setVisible(false)
+        setVisible(false)
     }
     const validationSchema = Yup.object({
         textarea: Yup.string().max(1500)

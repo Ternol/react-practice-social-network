@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {FC} from 'react';
 import * as Yup from "yup";
 import {useFormik} from "formik";
 import {useDispatch} from "react-redux";
 import {addMessage} from "../../redux/reducers/dialogsReducer";
 
-const NewMessageForm = () => {
+const NewMessageForm:FC = () => {
     const dispatch = useDispatch()
 
     const initialValues = {

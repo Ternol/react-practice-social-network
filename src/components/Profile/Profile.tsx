@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {FC, useEffect} from 'react'
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import ProfileStatus from "./ProfileStatus/ProfileStatus";
 import s from './Profile.module.css';
@@ -9,8 +9,7 @@ import {useDispatch} from "react-redux";
 import {getStatus, setProfile} from "../../redux/reducers/profileReducer";
 
 
-
-const Profile = () => {
+const Profile:FC = () => {
 
     const authorizedUserId = useTypedSelector(state => state.auth.id)
 
@@ -26,7 +25,7 @@ const Profile = () => {
     useEffect(() => {
         dispatch(setProfile(userIdObj.id))
         dispatch(getStatus(userIdObj.id))
-    }, [userIdObj.id])
+    }, [userIdObj.id,dispatch])
 
 
     const profile = useTypedSelector(state => state.profilePage.profile)

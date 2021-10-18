@@ -1,6 +1,13 @@
-import React from 'react';
+import React, {FC} from 'react';
 import s from './MyModal.module.css';
-const MyModal = ({children,visible,setVisible}) => {
+
+type PropsType = {
+    children: React.ReactChild | React.ReactNode,
+    visible: boolean,
+    setVisible: (bool:boolean) => void
+}
+
+const MyModal:FC<PropsType> = ({children,visible,setVisible}) => {
 
     const rootClasses = [s.myModal]
 

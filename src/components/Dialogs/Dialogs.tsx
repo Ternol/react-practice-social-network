@@ -1,4 +1,4 @@
-import React from "react";
+import React, {FC} from "react";
 import s from './dialogs.module.css';
 import DialogItem from "./Dialogitem/DialogItem";
 import Message from "./Message/Message";
@@ -6,7 +6,7 @@ import NewMessageForm from "./NewMessageForm";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 
 
-const Dialogs = () => {
+const Dialogs:FC = () => {
 
     const {dialogsData, messagesData} = useTypedSelector(state => state.dialogsPage)
 

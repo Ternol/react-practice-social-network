@@ -1,21 +1,26 @@
-import React, {useEffect} from 'react';
-import {connect} from "react-redux";
+import React, {FC, useEffect} from 'react';
+import {useDispatch} from "react-redux";
 import {privateRoutes, publicRoutes} from "./routes/routes";
 import {Route,Switch,Redirect} from "react-router-dom";
 import Loader from "./UI/Loader/Loader";
 import {initializeApp} from "./redux/reducers/appReducer";
+import {useTypedSelector} from "./hooks/useTypedSelector";
 
-const AppRouter = (props) => {
+const AppRouter:FC = () => {
+    const {isAuth} = useTypedSelector(state => state.auth)
+    const {initialized} = useTypedSelector(state => state.app)
+    const dispatch = useDispatch()
+
     useEffect(()=> {
-        props.initializeApp()
-    },[props])
+        dispatch(initializeApp())
+    },[dispatch])
 
     return (
         <div>
-            {!props.initialized
+            {!initialized
                 ? <Loader/>
                 : <div>
-                    {props.isAuth
+                    {isAuth
                         ? <Switch>
                             {privateRoutes.map(route => <Route
                                 key={route.path}
@@ -40,10 +45,4 @@ const AppRouter = (props) => {
     );
 };
 
-const mapStateToProps = (state) => ({
-    isAuth: state.auth.isAuth,
-    initialized: state.app.initialized
-})
-
-
-export default connect(mapStateToProps, {initializeApp})(AppRouter);
+export default AppRouter;
