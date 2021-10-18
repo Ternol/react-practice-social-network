@@ -1,15 +1,22 @@
 import React from 'react';
 import {useFormik} from 'formik'
 import * as Yup from 'yup'
-import MyButton from "../../../../../../../UI/MyButton/MyButton";
+import MyButton from "../../../../UI/MyButton/MyButton";
+import {useDispatch} from "react-redux";
+import {addPost} from "../../../../redux/reducers/profileReducer";
 
+type PropsType = {
+    setVisible: (a:boolean)=>void
+}
 
-const NewPostForm = (props) => {
+const NewPostForm = (props:PropsType) => {
+    const dispatch = useDispatch()
+
     const initialValues = {
         textarea: ''
     }
-    const onSubmit = (values, onSubmitProps) => {
-        props.addPost(values.textarea);
+    const onSubmit = (values: typeof initialValues, onSubmitProps:any) => {
+        dispatch(addPost(values.textarea));
         onSubmitProps.resetForm();
         props.setVisible(false)
     }

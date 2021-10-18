@@ -8,3 +8,7 @@
 .myPostsBlock{
     margin-top: 20px;
 }
+
+.myModalHeight{
+    max-height: 400px
+}

@@ -12,6 +12,7 @@ const UsersList: React.FC = () => {
 
     const {currentPage,isLoading,pageSize,totalUsersCount,usersData} = useTypedSelector(state => state.usersPage)
     const dispatch = useDispatch()
+
     useEffect(() => {
        dispatch(getUsers(currentPage, pageSize))
     }, [])

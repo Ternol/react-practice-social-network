@@ -1,9 +1,18 @@
 import React from 'react'
 import s from './Post.module.css';
-import defaultAva from './../../../../../../../img/defaultAva.png'
+import defaultAva from '../../../../img/defaultAva.png'
 
-const Post = (props) => {
-    const userAvatar = props.avatar || defaultAva;
+
+type PropsType = {
+    avatar: string | null,
+    userName: string,
+    messages: string
+}
+
+const Post = (props:PropsType) => {
+
+    const userAvatar = props.avatar ? props.avatar : defaultAva
+
     return (
         <div className={s.post}>
             <div className={s.postAbout}>
@@ -14,7 +23,7 @@ const Post = (props) => {
                     <span>{props.userName}</span>
                 </div>
             </div>
-            <div className={s.postBody}><span>{props.message}</span>
+            <div className={s.postBody}><span>{props.messages}</span>
             </div>
         </div>
     )

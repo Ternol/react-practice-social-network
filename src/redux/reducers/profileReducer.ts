@@ -108,7 +108,7 @@ export const setProfile = (userId: number):ThunkType => async (dispatch: Dispatc
 
 export const getStatus = (userId: number):ThunkType => async (dispatch: Dispatch<DispatchType>) => {
     const response = await profileAPI.getStatus(userId)
-    if (response) dispatch(setStatusToState(response))
+    response? dispatch(setStatusToState(response)) : dispatch(setStatusToState(''))
 }
 export const updateStatus = (status: string):ThunkType => async (dispatch: Dispatch<DispatchType>) => {
     const response = await profileAPI.updateMyStatus(status)
