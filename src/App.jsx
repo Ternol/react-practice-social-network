@@ -1,14 +1,14 @@
 import React from "react";
 import './App.css';
-import HeaderContainer from "./components/HeaderContainer/HeaderContainer";
 import AppRouter from "./AppRouter";
 import Footer from "./components/Footer/Footer";
+import Header from "./components/Header/Header";
 
 const App = () => {
     return (
         <div className="wrapper">
             <div className='site-content'>
-                <header><HeaderContainer/></header>
+                <header><Header/></header>
                 <main>
                     <div className="container">
                         <AppRouter/>

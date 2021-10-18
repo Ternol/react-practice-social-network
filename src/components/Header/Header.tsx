@@ -1,13 +1,18 @@
-import React from "react";
-import logo from './../../../img/icons/logo-32.png'
-import arrDwnIcon from './../../../img/icons/arrow-16.png'
+import React, {FC} from "react";
+import logo from '../../img/icons/logo-32.png'
+import arrDwnIcon from '../../img/icons/arrow-16.png'
 import s from './header.module.css';
 import {useHistory} from "react-router-dom";
-import {headerLinks} from "../../../routes/headerLinks";
+import {headerLinks} from "../../routes/headerLinks";
+import {useTypedSelector} from "../../hooks/useTypedSelector";
+import {useLogoutThunk} from "../../hooks/useLogoutThunk";
 
 
-const Header = (props) => {
+const Header:FC = () => {
+    const {login, isAuth} = useTypedSelector(state => state.auth)
     const router = useHistory();
+
+    const logoutUser = useLogoutThunk()
     return (
             <div className="container">
                 <div className={s.headerBlock}>
@@ -23,11 +28,11 @@ const Header = (props) => {
                                                           <p>{linkItem.text}</p> </div>)}
                     </div>
                     <div className={s.loginBlock}>
-                        {props.isAuth
+                        {isAuth
                             ?
                             <div>
-                                <div className={s.loginDropDown} onClick={props.logoutUser}><span>Exit</span></div>
-                                <span className={s.loginName}>{props.login}</span>
+                                <div className={s.loginDropDown} onClick={logoutUser}><span>Exit</span></div>
+                                <span className={s.loginName}>{login}</span>
                                 <img src={arrDwnIcon} alt={'arrowDwn'}/>
                             </div>
                             : <div onClick={() => router.push('/login/')}><span>LogIn</span></div>

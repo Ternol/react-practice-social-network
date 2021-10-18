@@ -3,14 +3,18 @@ import s from './dialogs.module.css';
 import DialogItem from "./Dialogitem/DialogItem";
 import Message from "./Message/Message";
 import NewMessageForm from "./NewMessageForm";
+import {useTypedSelector} from "../../hooks/useTypedSelector";
 
 
-const Dialogs = (props) => {
-    const dialogElements = props.dialogsData
+const Dialogs = () => {
+
+    const {dialogsData, messagesData} = useTypedSelector(state => state.dialogsPage)
+
+    const dialogElements = dialogsData
         .map(dialog => <DialogItem name={dialog.name} id={dialog.id} key={dialog.id}/>
         )
 
-    const messageElements = props.messagesData
+    const messageElements = messagesData
         .map(message => <Message text={message.message} key={message.id}/>)
 
     return (
@@ -20,7 +24,7 @@ const Dialogs = (props) => {
             </div>
             <div className={s.messages}>
                 <div>{messageElements}</div>
-                <NewMessageForm addMesage={props.addMessage}/>
+                < NewMessageForm />
             </div>
         </div>
     )

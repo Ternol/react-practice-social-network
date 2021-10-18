@@ -1,13 +1,17 @@
 import React from 'react';
 import * as Yup from "yup";
 import {useFormik} from "formik";
+import {useDispatch} from "react-redux";
+import {addMessage} from "../../redux/reducers/dialogsReducer";
 
-const NewMessageForm = (props) => {
+const NewMessageForm = () => {
+    const dispatch = useDispatch()
+
     const initialValues = {
         textarea: ''
     }
-    const onSubmit = (values, onSubmitProps) => {
-        props.addMessage(values.textarea);
+    const onSubmit = (values: typeof initialValues, onSubmitProps: any) => {
+        dispatch(addMessage(values.textarea))
         onSubmitProps.resetForm()
     }
     const validationSchema = Yup.object({
@@ -21,13 +25,13 @@ const NewMessageForm = (props) => {
 
     return (
         <form onSubmit={formik.handleSubmit}>
-            <label htmlFor="textarea">Новое сообщение</label>
+            <label htmlFor="textarea">New message</label>
             <textarea name="textarea"
                       id="textarea"
                       value={formik.values.textarea}
                       onChange={formik.handleChange}
             />
-            <button type={"submit"}>Отправить</button>
+            <button type={"submit"}>Send</button>
         </form>
     );
 };
