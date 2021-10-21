@@ -18,15 +18,20 @@ const UsersList: FC = () => {
 
     const urlParamsObj = useLocation()
 
-    function getQueryParamsFromUrl(locationObj:typeof urlParamsObj, param:string) {
+    function getQueryParamsFromUrl(locationObj:typeof urlParamsObj) {
         const params = new URLSearchParams(locationObj.search)
-        return params.get(`${param}`)
+        const userSearch = params.get('term')
+        const friendSearch = params.get('friend')
+        return ({
+            term: userSearch,
+            friend: friendSearch
+        })
     }
 
 
     useEffect(() => {
-       const queryParam = getQueryParamsFromUrl(urlParamsObj, 'term')
-       queryParam ? dispatch(getUsers(1,pageSize,queryParam)) :
+       const queryParam = getQueryParamsFromUrl(urlParamsObj)
+       queryParam.term || queryParam.friend ? dispatch(getUsers(1,pageSize,queryParam.term,queryParam.friend)) :
        dispatch(getUsers(currentPage, pageSize))
     }, [dispatch,pageSize,currentPage])
 

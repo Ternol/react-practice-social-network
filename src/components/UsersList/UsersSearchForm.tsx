@@ -9,27 +9,39 @@ import {getUsers} from "../../redux/reducers/usersReducer";
 const UsersSearchForm: FC = () => {
     const dispatch = useDispatch()
     const initialValues = {
-        term: ''
+        term: '',
+        friend: ''
     }
     const router = useHistory()
     const onSubmit = (values: typeof initialValues) => {
-        if (!values.term) {
+
+        if (!values.term && !values.friend) {
             router.push('?')
             dispatch(getUsers(1,100))
             return
         }
-        router.push(`?term=${values.term}`)
-        dispatch(getUsers(1,20,values.term))
+        router.push(`?term=${values.term}&friend=${values.friend}`)
+        dispatch(getUsers(1,20,values.term,values.friend))
     }
     return (
         <div className={s.searchFormWrapper}>
             <Formik initialValues={initialValues} onSubmit={onSubmit}>
                 <Form>
                     <div className={s.searchFormElements}>
-                        <div>
+                        <div className={s.columnWrapper}>
+                            <label>Find users</label>
                             <Field className={s.searchFormInput} type="text"
-                                    name='term'/></div>
-                        <div><MyButton type='submit'>Search</MyButton></div>
+                                    name='term'/>
+                        </div>
+                        <div className={s.columnWrapper}>
+                            <label>Filter</label>
+                            <Field className={s.searchFormSelect} name={'friend'} as={'select'}>
+                                <option value={''}>All</option>
+                                <option value={'true'}>Only followed</option>
+                                <option value={'false'}>Only unfollowed</option>
+                            </Field>
+                        </div>
+                        <div className={s.searchFormButton}><MyButton type='submit'>Search</MyButton></div>
                     </div>
                 </Form>
             </Formik>

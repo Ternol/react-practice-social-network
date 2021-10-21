@@ -21,31 +21,28 @@ const instance = axios.create({
 
 export const usersAPI = {
 
-    getFilteredUsers(pageNumber = 1, pageSize = 20, term: string | null=null) {
-        return instance.get<getUsersResponseType>(`users/?page=${pageNumber}&count=${pageSize}${term ? `&term=${term}` : ''}`)
-            .then(response => {
-                if (response.status === 200) return response.data
-            })
+    async getFilteredUsers(pageNumber = 1, pageSize = 20,
+                           term: string | null = null,friend: string | null = null) {
+        let response = await instance.get<getUsersResponseType>
+        (`users/?page=${pageNumber}&count=${pageSize}${term ? `&term=${term}` : ''}${friend ? `&friend=${friend}` : ''}`);
+        if (response.status === 200) return response.data
     },
 
-    changePage(pageNumber:number, pageSize = 100) {
-        return instance.get<getUsersResponseType>(`users/?page=${pageNumber}&count=${pageSize}`)
-            .then(response => {
-                if (response.status === 200) return response.data
-            })
+    async changePage(pageNumber: number, pageSize = 100) {
+        const response = await instance.get<getUsersResponseType>(`users/?page=${pageNumber}&count=${pageSize}`);
+        if (response.status === 200)
+            return response.data;
     },
 
-    unFollowUser(userId:number) {
-        return instance.delete<defaultResponseType>(`follow/${userId}`)
-            .then(response => {
-                if (response.status === 200) return response.data
-            })
+    async unFollowUser(userId: number) {
+        const response = await instance.delete<defaultResponseType>(`follow/${userId}`);
+        if (response.status === 200)
+            return response.data;
     },
-    followUser(userId:number) {
-        return instance.post<defaultResponseType>(`/follow/${userId}`)
-            .then(response => {
-                if (response.status === 200) return response.data
-            })
+    async followUser(userId: number) {
+        const response = await instance.post<defaultResponseType>(`/follow/${userId}`);
+        if (response.status === 200)
+            return response.data;
     }
 
 }
@@ -64,12 +61,11 @@ export const profileAPI = {
             alert(message)
         }
     },
-    getStatus(userId:number) {
-        return instance.get<string>(`profile/status/${userId}`).then(response => {
-            if (response.status === 200) {
-                return response.data
-            }
-        })
+    async getStatus(userId: number) {
+        const response = await instance.get<string>(`profile/status/${userId}`);
+        if (response.status === 200) {
+            return response.data;
+        }
     },
     updateMyStatus(status:string) {
         return instance.put<defaultResponseType>('profile/status/', {status})
@@ -88,11 +84,10 @@ export const profileAPI = {
 
 
 export const authAPI = {
-    setAuthData() {
-        return instance.get<setAuthDataType>('auth/me')
-            .then(response => {
-                if (response.status === 200) return response.data
-            })
+    async setAuthData() {
+        const response = await instance.get<setAuthDataType>('auth/me');
+        if (response.status === 200)
+            return response.data;
     },
     logout() {
         return instance.delete<defaultResponseType>('auth/login')

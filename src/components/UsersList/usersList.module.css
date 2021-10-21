@@ -1,6 +1,7 @@
 .searchFormWrapper {
     padding: 10px;
-    margin-left: 22px;
+    margin-left: 20px;
+    display: flex;
 }
 .searchFormElements {
     display: flex;
@@ -9,8 +10,28 @@
     padding: 2px;
     margin-right: 20px;
 }
+.columnWrapper{
+    display: flex;
+    flex-direction: column;
+}
+
 .searchFormInput{
     height: 45px;
+    border: 1px solid #343a40;
+    border-radius: 5px;
+}
+
+.searchFormButton{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+.searchFormSelect{
+    height: 45px;
+    text-align: right;
+    color: #343a40;
+    border: 1px solid #343a40;
+    border-radius: 5px;
 }
 .userList {
     padding-top: 10px;

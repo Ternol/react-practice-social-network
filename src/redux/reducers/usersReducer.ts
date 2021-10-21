@@ -119,9 +119,10 @@ type DispatchType = Dispatch<userReducerActionsTypes>
 type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, userReducerActionsTypes>
 
 
-export const getUsers = (currentPage:number, pageSize:number,term?: string | null):ThunkType => async (dispatch:DispatchType) => {
+export const getUsers = (currentPage:number, pageSize:number,
+                         term?: string | null, friend?:null | string):ThunkType => async (dispatch:DispatchType) => {
     dispatch(showLoader(true))
-    const response = await usersAPI.getFilteredUsers(currentPage, pageSize,term)
+    const response = await usersAPI.getFilteredUsers(currentPage, pageSize, term, friend)
     if (response) {
         dispatch(setUsers(response.items));
         dispatch(setTotalUsersCount(response.totalCount));
