@@ -1,0 +1,17 @@
+.searchFormWrapper {
+    padding: 10px;
+    margin-left: 22px;
+}
+.searchFormElements {
+    display: flex;
+}
+.searchFormElements div{
+    padding: 2px;
+    margin-right: 20px;
+}
+.searchFormInput{
+    height: 45px;
+}
+.userList {
+    padding-top: 10px;
+}
