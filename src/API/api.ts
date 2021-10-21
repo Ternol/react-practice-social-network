@@ -20,8 +20,9 @@ const instance = axios.create({
 
 
 export const usersAPI = {
-    getUsers(pageNumber = 1, pageSize = 100) {
-        return instance.get<getUsersResponseType>(`users/?page=${pageNumber}&count=${pageSize}`)
+
+    getFilteredUsers(pageNumber = 1, pageSize = 20, term: string | null=null) {
+        return instance.get<getUsersResponseType>(`users/?page=${pageNumber}&count=${pageSize}${term ? `&term=${term}` : ''}`)
             .then(response => {
                 if (response.status === 200) return response.data
             })

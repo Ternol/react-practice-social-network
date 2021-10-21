@@ -118,9 +118,10 @@ export const showLoader = (bool:boolean):ShowLoaderActionType =>
 type DispatchType = Dispatch<userReducerActionsTypes>
 type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, userReducerActionsTypes>
 
-export const getUsers = (currentPage:number, pageSize:number):ThunkType => async (dispatch:DispatchType) => {
+
+export const getUsers = (currentPage:number, pageSize:number,term?: string | null):ThunkType => async (dispatch:DispatchType) => {
     dispatch(showLoader(true))
-    const response = await usersAPI.getUsers(currentPage, pageSize)
+    const response = await usersAPI.getFilteredUsers(currentPage, pageSize,term)
     if (response) {
         dispatch(setUsers(response.items));
         dispatch(setTotalUsersCount(response.totalCount));

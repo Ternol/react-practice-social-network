@@ -15,3 +15,7 @@
 .userList {
     padding-top: 10px;
 }
+.usersNotFound {
+    text-align: center;
+    font-size: 26px;
+}
