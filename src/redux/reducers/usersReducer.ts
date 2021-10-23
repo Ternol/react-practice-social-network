@@ -1,6 +1,6 @@
 import {usersAPI} from "../../API/api";
 import {
-    FollowSuccessActionType,
+    FollowSuccessActionType, SetFilterActionType,
     SetPageActionType,
     SetTotalUsersCountActionType,
     SetUsersActionType,
@@ -17,25 +17,21 @@ import { ThunkAction } from "redux-thunk";
 import {AppStateType} from "../reduxStore";
 import {resultCodes} from "../../API/apiTypes";
 
-export type InitialStateType = {
-    usersData: Array<UserDataType>,
-    pageSize: number,
-    totalUsersCount: number,
-    currentPage: number,
-    isFollowingInProgress: Array<number>// array of userId
-    isLoading: boolean
-}
-
-const initialState:InitialStateType = {
+const initialState = {
     usersData: [] as Array<UserDataType>,
     pageSize: 100,
     totalUsersCount: 1000,
     currentPage: 1,
-    isFollowingInProgress: [] as Array<number>,
+    isFollowingInProgress: [] as Array<number>, //array of userId
     isLoading: false,
+    filter: {
+        term: '',
+        friend: null as null | boolean
+    }
 }
-
-const usersReducer = (state = initialState, action:userReducerActionsTypes) => {
+export type InitialStateType = typeof initialState
+export type FilterType = typeof initialState.filter
+const usersReducer = (state = initialState, action:userReducerActionsTypes):InitialStateType => {
     switch (action.type) {
 
         case userReducerActions.FOLLOW : {
@@ -76,6 +72,11 @@ const usersReducer = (state = initialState, action:userReducerActionsTypes) => {
                 ...state, totalUsersCount: action.totalCount
             }
         }
+        case userReducerActions.SET_FILTER: {
+            return {
+                ...state, filter: action.filter
+            }
+        }
         case userReducerActions.SET_LOADER:
             return {
                 ...state, isLoading: action.bool
@@ -106,6 +107,9 @@ export const setPage = (currentPage:number):SetPageActionType =>
 export const setTotalUsersCount = (totalCount:number):SetTotalUsersCountActionType =>
     ({type: userReducerActions.SET_TOTAL_USERS_COUNT, totalCount})
 
+export const setFilter = (filter: FilterType):SetFilterActionType => ({
+    type: userReducerActions.SET_FILTER, filter
+})
 
 export const toggleFollowingInProgress =
     (bool: boolean, userId:number): ToggleFollowingInProgressActionType =>
@@ -119,10 +123,11 @@ type DispatchType = Dispatch<userReducerActionsTypes>
 type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, userReducerActionsTypes>
 
 
-export const getUsers = (currentPage:number, pageSize:number,
-                         term?: string | null, friend?:null | string):ThunkType => async (dispatch:DispatchType) => {
+export const setFilterAndRequestUsers = (currentPage:number, pageSize:number,
+                                         filter:FilterType):ThunkType => async (dispatch:DispatchType) => {
     dispatch(showLoader(true))
-    const response = await usersAPI.getFilteredUsers(currentPage, pageSize, term, friend)
+    dispatch(setFilter(filter))
+    const response = await usersAPI.getFilteredUsers(currentPage, pageSize, filter.term, filter.friend)
     if (response) {
         dispatch(setUsers(response.items));
         dispatch(setTotalUsersCount(response.totalCount));

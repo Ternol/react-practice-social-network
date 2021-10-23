@@ -22,7 +22,7 @@ const instance = axios.create({
 export const usersAPI = {
 
     async getFilteredUsers(pageNumber = 1, pageSize = 20,
-                           term: string | null = null,friend: string | null = null) {
+                           term: string = '',friend: null| boolean = null) {
         let response = await instance.get<getUsersResponseType>
         (`users/?page=${pageNumber}&count=${pageSize}${term ? `&term=${term}` : ''}${friend ? `&friend=${friend}` : ''}`);
         if (response.status === 200) return response.data

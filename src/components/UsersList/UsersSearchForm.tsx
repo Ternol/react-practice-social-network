@@ -2,30 +2,40 @@ import React, {FC} from 'react';
 import {Field, Form, Formik} from "formik";
 import MyButton from "../../UI/MyButton/MyButton";
 import s from './usersList.module.css'
-import { useHistory } from 'react-router-dom';
 import {useDispatch} from "react-redux";
-import {getUsers} from "../../redux/reducers/usersReducer";
+import {FilterType, setFilterAndRequestUsers} from "../../redux/reducers/usersReducer";
+import {useTypedSelector} from "../../hooks/useTypedSelector";
+
+
 
 const UsersSearchForm: FC = () => {
-    const dispatch = useDispatch()
-    const initialValues = {
-        term: '',
-        friend: ''
-    }
-    const router = useHistory()
-    const onSubmit = (values: typeof initialValues) => {
 
-        if (!values.term && !values.friend) {
-            router.push('?')
-            dispatch(getUsers(1,100))
-            return
+    const {pageSize,filter} = useTypedSelector(state => state.usersPage)
+
+    type FriendFormType = 'null' | 'true' | 'false'
+
+    type FormValuesType = {
+        term: string,
+        friend: FriendFormType
+    }
+    const dispatch = useDispatch()
+
+
+
+    const onSubmit = (values: FormValuesType) => {
+        const filter: FilterType = {
+            term: values.term,
+            friend: values.friend === 'null' ? null : values.friend === 'true'
         }
-        router.push(`?term=${values.term}&friend=${values.friend}`)
-        dispatch(getUsers(1,20,values.term,values.friend))
+
+        dispatch(setFilterAndRequestUsers(1, pageSize, filter))
     }
     return (
         <div className={s.searchFormWrapper}>
-            <Formik initialValues={initialValues} onSubmit={onSubmit}>
+            <Formik
+                enableReinitialize
+                initialValues={{term: filter.term, friend: String(filter.friend) as FriendFormType}}
+                    onSubmit={onSubmit}>
                 <Form>
                     <div className={s.searchFormElements}>
                         <div className={s.columnWrapper}>

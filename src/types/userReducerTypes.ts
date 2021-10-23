@@ -1,3 +1,4 @@
+import {FilterType} from "../redux/reducers/usersReducer";
 
 export type UserDataType = {
     id: number
@@ -37,6 +38,7 @@ export enum userReducerActions {
     SET_USERS = 'usersReducer/SET_USERS',
     SET_CURRENT_PAGE = 'usersReducer/SET_CURRENT_PAGE',
     SET_TOTAL_USERS_COUNT = 'usersReducer/SET_TOTAL_USERS_COUNT',
+    SET_FILTER = 'usersReducer/SET_FILTER',
     TOGGLE_FOLLOWING_IN_PROGRESS = 'usersReducer/TOGGLE_FOLLOWING_IN_PROGRESS',
     SET_LOADER = 'usersReducer/SET_LOADER'
 }
@@ -65,6 +67,15 @@ export type SetTotalUsersCountActionType = {
     totalCount: number
 }
 
+
+
+
+
+export type SetFilterActionType = {
+    type: userReducerActions.SET_FILTER
+    filter: FilterType
+}
+
 export type ToggleFollowingInProgressActionType = {
     type: userReducerActions.TOGGLE_FOLLOWING_IN_PROGRESS
     userId: number
@@ -78,3 +89,4 @@ export type ShowLoaderActionType = {
 
 export type userReducerActionsTypes = FollowSuccessActionType | UnFollowSuccessActionType | SetUsersActionType |
     SetPageActionType | SetTotalUsersCountActionType | ToggleFollowingInProgressActionType | ShowLoaderActionType
+| SetFilterActionType
